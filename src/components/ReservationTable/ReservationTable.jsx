@@ -3,7 +3,9 @@ import "../../views/Dashboard/Dashboard.css"
 const ReservationTable = () => {
     const reservations = [
         { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
-        // Agrega más reservaciones aquí...
+        { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
+        { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
+        { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
     ];
 
     return (
