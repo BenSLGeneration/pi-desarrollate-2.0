@@ -1,9 +1,13 @@
+import GeneralSummary from '../../components/GeneralSummary/GeneralSummary';
+import ReservationTable from '../../components/ReservationTable/ReservationTable';
+
 const Dashboard = () => {
-    return (
-      <div>
-        <h1>Se ve el Dashboard</h1>
-      </div>
-    );
-  };
-  
-  export default Dashboard;
+  return (
+    <div>
+      <GeneralSummary />
+      <ReservationTable />
+    </div>
+  );
+};
+
+export default Dashboard;

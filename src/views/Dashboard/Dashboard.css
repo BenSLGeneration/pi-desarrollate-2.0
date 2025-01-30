@@ -1,0 +1,50 @@
+/* Estilos para las tarjetas de resumen */
+.summary-card {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+}
+
+.summary-card.green {
+    background-color: #28a745;
+}
+
+.summary-card.red {
+    background-color: #dc3545;
+}
+
+.summary-card.blue {
+    background-color: #007bff;
+}
+
+.summary-card.yellow {
+    background-color: #ffc107;
+}
+
+/* Estilos para la tabla */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.table-borderless td,
+.table-borderless th {
+    border: none;
+}
+
+/* Botón moderno */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
