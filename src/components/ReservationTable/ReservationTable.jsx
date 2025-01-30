@@ -8,34 +8,36 @@ const ReservationTable = () => {
 
     return (
         <div className="container my-4">
-            <div className="card shadow-sm p-3">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h5 className="mb-0 fw-bold">Lista de Reservaciones</h5>
+            <div className="card border-0 shadow-sm p-4">
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                    <h5 className="mb-0 fw-bold text-primary">Lista de Reservaciones</h5>
+                    <button className="btn btn-primary btn-sm">
+                        <i className="bi bi-download me-2"></i>Descargar Planilla
+                    </button>
                 </div>
-                <table className="table">
-                    <thead>
-                        <tr className="table-info">
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Check In / Check Out</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Habitacion</th>
-                            <th scope="col">Pago Adeudado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {reservations.map((reservation, index) => (
-                            <tr key={index}>
-                                <td>{reservation.name}</td>
-                                <td>{reservation.checkInOut}</td>
-                                <td>{reservation.type}</td>
-                                <td>{reservation.room}</td>
-                                <td>{reservation.payment}</td>
+                <div className="table-responsive">
+                    <table className="table table-hover table-borderless">
+                        <thead className="table-light">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Check In / Check Out</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Habitación</th>
+                                <th scope="col">Pago Adeudado</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <div className="text-end mt-3">
-                    <button className="btn btn-download">Descargar Planilla</button>
+                        </thead>
+                        <tbody>
+                            {reservations.map((reservation, index) => (
+                                <tr key={index}>
+                                    <td>{reservation.name}</td>
+                                    <td>{reservation.checkInOut}</td>
+                                    <td>{reservation.type}</td>
+                                    <td>{reservation.room}</td>
+                                    <td>{reservation.payment}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

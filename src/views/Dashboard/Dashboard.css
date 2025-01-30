@@ -1,54 +1,50 @@
-/* Resumen General */
+/* Estilos para las tarjetas de resumen */
 .summary-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    border-radius: 10px;
-    font-weight: bold;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
 }
 
 .summary-card.green {
-    background-color: #e6f8e6;
-    color: #2b7a2b;
+    background-color: #28a745;
 }
 
 .summary-card.red {
-    background-color: #fde6e6;
-    color: #c92a2a;
+    background-color: #dc3545;
 }
 
 .summary-card.blue {
-    background-color: #e6f0ff;
-    color: #2a4fc9;
+    background-color: #007bff;
 }
 
 .summary-card.yellow {
-    background-color: #fff6e6;
-    color: #c97c2a;
+    background-color: #ffc107;
 }
 
-.summary-card i {
-    font-size: 24px;
-    margin-right: 10px;
+/* Estilos para la tabla */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
 }
 
-/* Reservas Resumen */
-.table-container {
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    padding: 20px;
+.table-borderless td,
+.table-borderless th {
+    border: none;
 }
 
-.btn-download {
+/* Botón moderno */
+.btn-primary {
     background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 10px 20px;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
 }
 
-.btn-download:hover {
+.btn-primary:hover {
     background-color: #0056b3;
 }
