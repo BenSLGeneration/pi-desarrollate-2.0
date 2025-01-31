@@ -1,15 +1,34 @@
+import { useState } from "react";
+
 const TablaPermisos = ({ datos }) => {
+    const [filtroStatus, setFiltroStatus] = useState("all");
+
+    // Funcion que maneja el cambio del filtro
+    const handleFiltroChange = (e) => {
+        setFiltroStatus(e.target.value);
+    };
+
+    // Aqui se filtran los datos con un callback
+    let datosFiltrados;
+
+    if (filtroStatus === "all") {
+        datosFiltrados = datos;
+    } else {
+        datosFiltrados = datos.filter(usuario => usuario.status.toLowerCase() === filtroStatus);
+    }
+
+
     return (
         <div className="card shadow mb-4" style={{ marginTop: '20px' }}>
             <div className="card-header py-3">
                 <div className="d-flex align-items-center justify-content-between mb-3">
                     <h6 className="m-0 font-weight-bold text-primary title-text-color">Administración de permisos</h6>
                     <input type="text" className="form-control w-50" placeholder="Buscar usuarios, cargos, etc." />
-                    <select className="form-control w-25 ml-2">
+                    <select className="form-control w-25 ml-2" value={filtroStatus} onChange={handleFiltroChange}>
                         <option value="all">Todos</option>
-                        <option value="confirmed">Confirmado</option>
-                        <option value="pending">Pendiente</option>
-                        <option value="inactive">Desvinculado</option>
+                        <option value="confirmado">Confirmado</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="desvinculado">Desvinculado</option>
                     </select>
                 </div>
             </div>
@@ -39,7 +58,7 @@ const TablaPermisos = ({ datos }) => {
                         </tfoot>
                         <tbody>
                             {/* Mapeo de datos dinámicos */}
-                            {datos.map((usuario) => (
+                            {datosFiltrados.map((usuario) => (
                                 <tr key={usuario.id}>
                                     <td>{usuario.id}</td>
                                     <td>

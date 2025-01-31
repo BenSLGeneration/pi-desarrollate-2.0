@@ -6,7 +6,7 @@ const Administracion = () => {
     { id: 1, nombre: 'John Doe', cargo: 'Product Owner', permisos: 'Administrador', status: 'Confirmado' },
     { id: 2, nombre: 'Jane Smith', cargo: 'Desarrolladora', permisos: 'Personal', status: 'Pendiente' },
     { id: 3, nombre: 'Carlos López', cargo: 'Diseñador UI', permisos: 'Personal', status: 'Confirmado' },
-    { id: 4, nombre: 'Ana Pérez', cargo: 'Cum Master', permisos: 'Administrador', status: 'Desvinculado' },
+    { id: 4, nombre: 'Ana Pérez', cargo: 'Scrum Master', permisos: 'Administrador', status: 'Desvinculado' },
   ];
 
   return (
