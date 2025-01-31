@@ -1,6 +1,7 @@
 import AdminPanel from '../../components/AdminPanel/AdminPanel';
 import GeneralSummary from '../../components/GeneralSummary/GeneralSummary';
 import ReservationTable from '../../components/ReservationTable/ReservationTable';
+import UserProfile from '../../components/UserProfile/UserProfile';
 
 const Dashboard = () => {
   return (
@@ -8,6 +9,7 @@ const Dashboard = () => {
       <GeneralSummary />
       <ReservationTable />
       <AdminPanel />
+      <UserProfile />
     </div>
   );
 };
