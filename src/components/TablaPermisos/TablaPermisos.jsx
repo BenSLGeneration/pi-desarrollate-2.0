@@ -1,6 +1,7 @@
 import { useState } from "react";
+import "../../views/Administracion/Administracion.css"
 
-const TablaPermisos = ({ datos }) => {
+const TablaPermisos = ({ datos, onAddUser }) => {
     const [filtroStatus, setFiltroStatus] = useState("all");
 
     // Funcion que maneja el cambio del filtro
@@ -23,6 +24,7 @@ const TablaPermisos = ({ datos }) => {
             <div className="card-header py-3">
                 <div className="d-flex align-items-center justify-content-between mb-3">
                     <h6 className="m-0 font-weight-bold text-primary title-text-color">Administración de permisos</h6>
+                    <button onClick={onAddUser} className='btn btn-primary mt-3'>Agregar usuario</button>
                     <input type="text" className="form-control w-50" placeholder="Buscar usuarios, cargos, etc." />
                     <select className="form-control w-25 ml-2" value={filtroStatus} onChange={handleFiltroChange}>
                         <option value="all">Todos</option>
