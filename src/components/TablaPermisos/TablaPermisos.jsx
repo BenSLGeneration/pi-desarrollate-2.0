@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "../../views/Administracion/Administracion.css"
 const TablaPermisos = ({ datos }) => {
     const [filtroStatus, setFiltroStatus] = useState("all");
 
