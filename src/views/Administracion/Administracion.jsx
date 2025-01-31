@@ -1,5 +1,11 @@
+
 import React, { useState } from 'react';
 import PaginacionPermisos from '../../components/PaginacionPermisos/PaginacionPermisos';
+
+import TablaPermisos from '../../components/TablaPermisos/TablaPermisos'; // Ajusta la ruta según tu estructura de carpetas
+import Sidebar from '../../components/Sidebar/Sidebar';
+import Navbar from '../../components/Navbar/Navbar';
+
 
 const Administracion = () => {
   const [lista, setLista] = useState([
@@ -37,10 +43,15 @@ const Administracion = () => {
   // }
  
   // Datos de ejemplo
-  
-  
+  const datosUsuarios = [
+    { id: 1, nombre: 'John Doe', cargo: 'Product Owner', permisos: 'Administrador', status: 'Confirmado' },
+    { id: 2, nombre: 'Jane Smith', cargo: 'Desarrolladora', permisos: 'Personal', status: 'Pendiente' },
+    { id: 3, nombre: 'Carlos López', cargo: 'Diseñador UI', permisos: 'Personal', status: 'Confirmado' },
+    { id: 4, nombre: 'Ana Pérez', cargo: 'Scrum Master', permisos: 'Administrador', status: 'Desvinculado' },
+  ];
 
   return (
+
     <div>
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
@@ -51,10 +62,13 @@ const Administracion = () => {
               <p className="mb-4"></p>
             </div>
           </div>
+          <div className='d-flex'>
 
-          {/*Paginacion de permisos */}
-          <PaginacionPermisos datos={lista} onAddUser={handleAddSection}/>
-
+            <Navbar />
+            <Sidebar />
+            {/* Pasar datos a la tabla */}
+            <TablaPermisos datos={datosUsuarios} />
+          </div>
         </div>
       </main>
     </div>
