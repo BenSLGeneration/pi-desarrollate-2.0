@@ -1,38 +1,41 @@
 const Sidebar = () => {
-    return (
-        <div className="container-fluid">
-      <div className="row flex-nowrap">
-        <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            
-          <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <a href="/" className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            </a>
-            <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-              <li className="nav-item fs-5 mb-4">
-                <a href="#" className="nav-link align-middle px-0">
-                  <i className="fs-5 bi-house-fill"></i>
-                  <span className="ms-1 d-none d-sm-inline">Home</span>
-                </a>
-              </li>
-              <li className="nav-item fs-5 mb-4">
-                <a href="#" className="nav-link px-0 align-middle">
-                  <i className="fs-5 bi-table"></i>
-                  <span className="ms-1 d-none d-sm-inline">Reservas</span>
-                </a>
-              </li>
-              <li className="nav-item fs-5">
-                <a href="#" className="nav-link px-0 align-middle">
-                  <i className="fs-5 bi-key"></i>
-                  <span className="ms-1 d-none d-sm-inline">Permisos</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+  return (
+    <div 
+      className="bg-dark text-white d-flex flex-column p-3 vh-100" 
+      style={{ 
         
-      </div>
+        position: "fixed", 
+        top: 0, 
+        left: 0, 
+        minHeight: "100vh", 
+        transition: "width 0.3s ease-in-out"
+      }}
+    >
+      <h4 className="text-center d-none d-sm-block">Menú</h4>
+      <ul className="nav flex-column">
+        <li className="nav-item">
+          <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
+            <i className="bi bi-house-fill me-2 fs-4"></i> 
+            <span className="d-none d-sm-inline">Home</span>  
+          </button>  
+        </li>
+
+        <li className="nav-item">
+          <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
+            <i className="bi bi-table me-2 fs-4"></i> 
+            <span className="d-none d-sm-inline">Reservas</span>
+          </button>
+        </li>
+
+        <li className="nav-item">
+          <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
+            <i className="bi bi-key me-2 fs-4"></i> 
+            <span className="d-none d-sm-inline">Permisos</span>
+          </button>
+        </li>
+      </ul>
     </div>
-    );
+  );
 };
 
 export default Sidebar;

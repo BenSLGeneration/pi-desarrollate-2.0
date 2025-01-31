@@ -1,10 +1,10 @@
 const TablaReservaciones = ({ datos }) => {
     return (
-        <div className="card shadow mb-4" style={{ marginTop: '20px' }}>
+        <div className="card shadow mb-4" style={{ marginTop: '20px', marginLeft: '250px' }}>
             <div className="card-header py-3">
                 <div className="d-flex align-items-center justify-content-between mb-3">
                     <h6 className="m-0 font-weight-bold text-primary title-text-color">Administración de Reservas</h6>
-                    <input type="date" className="form-control w-25" style={{ marginRight: '10px' }} />
+                    <input type="date" className="form-control w-25" style={{ marginRight: '10px'  }} />
                     <button className="btn btn-primary">Agregar Reserva</button>
                 </div>
             </div>

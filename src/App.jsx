@@ -14,9 +14,9 @@ const App = () => {
         <Route path="/" element={<Navigate to="/login" />} />
         
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<><Navbar /><Sidebar /><Dashboard /></>} />
-        <Route path="/reservaciones" element={<><Navbar /><Sidebar /><Reservaciones /></>} />
-        <Route path="/administracion" element={<><Navbar /><Sidebar /><Administracion /></>} />
+        <Route path="/dashboard" element={<><Dashboard /></>} />
+        <Route path="/reservaciones" element={<><Reservaciones /></>} />
+        <Route path="/administracion" element={<><Administracion /></>} />
 
         {/* Ruta 404 */}
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
