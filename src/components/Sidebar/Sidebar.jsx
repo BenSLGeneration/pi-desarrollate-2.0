@@ -1,3 +1,8 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+
+
 const Sidebar = () => {
   return (
     <div 
@@ -14,24 +19,30 @@ const Sidebar = () => {
       <h4 className="text-center d-none d-sm-block">Menú</h4>
       <ul className="nav flex-column">
         <li className="nav-item">
-          <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
-            <i className="bi bi-house-fill me-2 fs-4"></i> 
-            <span className="d-none d-sm-inline">Home</span>  
-          </button>  
+          <Link to="/dashboard">
+            <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
+              <i className="bi bi-house-fill me-2 fs-4"></i> 
+              <span className="d-none d-sm-inline">Home</span>  
+            </button>  
+          </Link>
         </li>
 
         <li className="nav-item">
-          <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
-            <i className="bi bi-table me-2 fs-4"></i> 
-            <span className="d-none d-sm-inline">Reservas</span>
-          </button>
+          <Link to="/reservas" >
+            <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
+              <i className="bi bi-table me-2 fs-4"></i> 
+              <span className="d-none d-sm-inline">Reservas</span>
+            </button>
+          </Link>
         </li>
 
         <li className="nav-item">
-          <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
-            <i className="bi bi-key me-2 fs-4"></i> 
-            <span className="d-none d-sm-inline">Permisos</span>
-          </button>
+          <Link to="/administracion">
+            <button type="button" className="btn btn-dark w-100 text-start border-0 d-flex align-items-center">
+              <i className="bi bi-key me-2 fs-4"></i> 
+              <span className="d-none d-sm-inline">Permisos</span>
+            </button>
+          </Link>
         </li>
       </ul>
     </div>
