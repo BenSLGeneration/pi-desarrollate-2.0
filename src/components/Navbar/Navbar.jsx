@@ -1,3 +1,5 @@
+import "../Navbar/navbar.css"
+
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-white shadow rounded-pill p-2 position-absolute top-0 end-0 m-3">

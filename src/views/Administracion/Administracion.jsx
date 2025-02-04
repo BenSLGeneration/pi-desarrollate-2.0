@@ -57,18 +57,18 @@ const Administracion = () => {
         <div id="content">
           <div id="ESPACIO VACÍO">
             {/* Main Content */}
-            <div className="container-fluid" style={{ marginTop: '90px' }}>
+            <div className="container-fluid" style={{ marginTop: '150px', paddingLeft: '200px', paddingRight: '200px'}}>
               <h1 className="h3 mb-2 text-gray-800"></h1>
               <p className="mb-4"></p>
             </div>
           </div>
-          <div className='d-flex'>
+
 
             <Navbar />
             <Sidebar />
             {/* Pasar datos a la tabla */}
             <TablaPermisos datos={datosUsuarios} />
-          </div>
+
         </div>
       </main>
     </div>
