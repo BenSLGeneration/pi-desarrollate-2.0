@@ -16,7 +16,7 @@ const Reservaciones = () => {
         <div id="content">
           <div id="ESPACIO VACÍO">
             {/* Main Content */}
-            <div className="container-fluid" style={{ marginTop: '90px' , marginLeft: '250px' }}>
+            <div className="container-fluid">
               <h1 className="h3 mb-2 text-gray-800">Reservaciones</h1>
               <p className="mb-4">Administración de las reservas de los huéspedes.</p>
             </div>
@@ -24,10 +24,7 @@ const Reservaciones = () => {
 
           {/* Pasar datos a la tabla */}
           <div className='d-flex'>
-          <Navbar />
-          <Sidebar />
-          <TablaReservaciones datos={datosReservas} />
-
+            <TablaReservaciones datos={datosReservas} />
           </div>
         </div>
       </main>

@@ -20,7 +20,7 @@ const TablaPermisos = ({ datos, onAddUser }) => {
 
 
     return (
-        <div className="card shadow mb-4" style={{ marginTop: '20px', marginLeft: '250px' }}>
+        <div className="card shadow mb-4">
             <div className="card-header py-3">
                 <div className="d-flex align-items-center justify-content-between mb-3">
                     <h6 className="m-0 font-weight-bold text-primary title-text-color">Administración de permisos</h6>

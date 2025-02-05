@@ -1,0 +1,17 @@
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-content-wrapper {
+    display: flex;
+    max-height: 100vh;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.layout-content-container {
+    padding: 32px;
+    flex: 0 1 auto;
+    overflow: auto;
+}

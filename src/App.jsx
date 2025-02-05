@@ -1,4 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import { GlobalLayout } from './layouts/GlobalLayout';
+
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import Administracion from './views/Administracion/Administracion';
@@ -14,9 +17,11 @@ const App = () => {
         <Route path="/" element={<Navigate to="/login" />} />
         
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<><Dashboard /></>} />
-        <Route path="/reservaciones" element={<><Reservaciones /></>} />
-        <Route path="/administracion" element={<><Administracion /></>} />
+        <Route element={<GlobalLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/reservaciones" element={<Reservaciones />} />
+          <Route path="/administracion" element={<Administracion />} />
+        </Route>
 
         {/* Ruta 404 */}
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
