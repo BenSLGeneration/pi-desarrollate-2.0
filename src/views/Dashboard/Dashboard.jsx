@@ -7,7 +7,7 @@ import Navbar from '../../components/Navbar/Navbar';
 
 const Dashboard = () => {
   return (
-    <div className=''>
+    <div >
       <Navbar />
       <Sidebar />
       <GeneralSummary />
