@@ -18,18 +18,18 @@ const Administracion = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // estado para controlar el modal
 
 
-  const handleAddUser = () => {
-    const ultimoID = lista.length > 0 ? Math.max(...lista.map(usuario => usuario.id)) : 0;
+  // const handleAddUser = () => {
+  //   const ultimoID = lista.length > 0 ? Math.max(...lista.map(usuario => usuario.id)) : 0;
 
-    const nuevoUsuario = {
-      id: ultimoID + 1,
-      nombre: 'Nuevo Usuario',
-      cargo: 'Personal Hotelero',
-      permisos: 'Personal',
-      status: 'Pendiente',
-    }
-    setLista([...lista, nuevoUsuario])
-   }
+  //   const nuevoUsuario = {
+  //     id: ultimoID + 1,
+  //     nombre: 'Nuevo Usuario',
+  //     cargo: 'Personal Hotelero',
+  //     permisos: 'Personal',
+  //     status: 'Pendiente',
+  //   }
+  //   setLista([...lista, nuevoUsuario])
+  //  }
     
   //   setLista([
   //     ...lista,
@@ -46,31 +46,40 @@ const Administracion = () => {
 
 
 
-  const handleCreateUser = async (userData) => {
-    try {
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",},
-        body: JSON.stringify(userData),
-      })
-      const result = await response.json()
-      if (response.ok) {
-       alert(result.message || "Usuario creado existosamente");
+  const handleCreateUser = (userData) => {
 
-       const nuevoUsuario = {...userData, id: lista.lenght + 1 };
-       setLista([...lista, nuevoUsuario])
-      } else {
-        alert(result.message || "Hubo un error al crear el usuario");
+    const ultimoID = lista.length > 0 ? Math.max(...lista.map((usuario) => usuario.id)) : 0;
+
+    // try {
+    //   const response = fetch("/api/users", {
+    //     method: "POST",
+    //     headers: {"Content-Type": "application/json"},
+    //     body: JSON.stringify(userData),
+    //   })
+    //   const result = response.json()
+    //   if (response.ok) {
+    //    alert(result.message || "Usuario creado existosamente");
+
+
+       const nuevoUsuario = {
+        id: ultimoID + 1,
+        nombre: userData.name,
+        cargo: userData.cargo,
+        permisos: userData.permisos,
+        status: userData.status,
       }
-    } catch (error) {
-      console.error("Error al crear el usuario:", error);
-      alert("Hubo un error al crear el usuario");
-    }
+      setLista([...lista, nuevoUsuario])
+     
+    //   } else {
+    //     alert(result.message || "Hubo un error al crear el usuario");
+    //   }
+    // } catch (error) {
+    //   console.error("Error al crear el usuario:", error);
+    //   alert("Hubo un error al crear el usuario");
+    // }
   }
 
   return (
-
     <div>
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
@@ -80,11 +89,12 @@ const Administracion = () => {
               <h1 className="h3 mb-2 text-gray-800">Administracion</h1>
               <p className="mb-4"></p>
 
-              <button className="btn btn-primary mt-3" onClick={() => setIsModalOpen(true)}>
+              <button onClick={() => setIsModalOpen(true)} className="btn btn-primary mt-3">
                 Crear Usuario Hotelero
               </button>
-                          {/* Pasar datos a la tabla */}
-             <PaginacionPermisos datos={lista} onAddUser={handleAddUser} />
+                          
+              {/* Pasar datos a la tabla */}
+              <PaginacionPermisos datos={lista} onAddUser={() => {}} />
             </div>
           </div>
 
@@ -94,7 +104,7 @@ const Administracion = () => {
       <CreateUserModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onCreateUser={handleCreateUser}
+        onCreate={handleCreateUser}
       />
     </div>
   );
