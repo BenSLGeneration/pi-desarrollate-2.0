@@ -8,7 +8,7 @@ import "../../views/Dashboard/Dashboard.css";
 
 const Dashboard = () => {
   return (
-    <div className="content-container flex-grow-1 p-4">
+    <div className="content-container flex-grow-1 p-5">
     <GeneralSummary />
     <ReservationTable />
     <AdminPanel />
