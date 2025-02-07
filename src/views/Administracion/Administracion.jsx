@@ -15,7 +15,12 @@ const Administracion = () => {
       { id: 4, nombre: 'Ana Pérez', cargo: 'Scrum Master', permisos: 'Administrador', status: 'Desvinculado' },
     ]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // estado para controlar el modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filtroStatus, setFiltroStatus] = useState("all")
+  const [busqueda, setBusqueda] = useState("");
+
+
+  // estado para controlar el modal
 
 
   // const handleAddUser = () => {
@@ -42,8 +47,24 @@ const Administracion = () => {
   //     }
   //   ])
   // }
- 
 
+  const handleFiltroChange = (e) => {
+    setFiltroStatus(e.target.value);
+  };
+
+  const handleBusquedaChange = (e) => {
+    setBusqueda(e.target.value);
+  };
+
+    const datosFiltrados = lista.filter(usuario => {
+    const matchesStatus = filtroStatus === "all" || 
+      usuario.status.toLowerCase() === filtroStatus;
+    
+    const matchesSearch = usuario.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      usuario.cargo.toLowerCase().includes(busqueda.toLowerCase());
+    
+    return matchesStatus && matchesSearch;
+  });
 
 
   const handleCreateUser = (userData) => {
@@ -84,12 +105,39 @@ const Administracion = () => {
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
           <div id="ESPACIO VACÍO">
-            {/* Main Content */}
-            <div className="container-fluid">
-              <h1 className="h3 mb-2 text-gray-800">Administracion</h1>
-              <p className="mb-4"></p>
+            {/* Contenido principal */}
+             <div className="container-fluid" style={{ paddingTop: '6rem'}}> {/* Padding para que el navbar no lo tape */}
 
-              <button onClick={() => setIsModalOpen(true)} className="btn btn-primary mt-3">
+              {/* Contenedor de controles */}
+              <div className="d-flex align-items-center justify-content-between mb-4">
+                <h6 className="m-0 font-weight-bold text-primary title-text-color">
+                  Administración de permisos
+                </h6>
+                
+                <div className='d-flex align-items-center gap-3' style={{ width: '40%' }}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Buscar usuarios, cargos, etc."
+                  />
+
+                  <select
+                    className="form-control w-25 ml-2"
+                    value={filtroStatus}
+                    onChange={handleFiltroChange}
+                  >
+                    <option value="all">Todos</option>
+                    <option value="confirmado">Confirmado</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="desvinculado">Desvinculado</option>
+                  </select>
+                </div>
+              </div>
+
+              <button 
+               onClick={() => setIsModalOpen(true)}
+               className="btn btn-primary mt-3"
+              >
                 Crear Usuario Hotelero
               </button>
                           
@@ -97,7 +145,6 @@ const Administracion = () => {
               <PaginacionPermisos datos={lista} onAddUser={() => {}} />
             </div>
           </div>
-
         </div>
       </main>
 
