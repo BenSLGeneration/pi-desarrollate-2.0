@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 
+
 // Función para crear un usuario PO
 const createUser = async (req, res) => {
     const { name, email, password } = req.body;
@@ -30,6 +31,18 @@ const createUser = async (req, res) => {
     }
 };
 
-// Funcion para añadir nuevos datos a la tabla de resumen de reservas
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = { createUser };
