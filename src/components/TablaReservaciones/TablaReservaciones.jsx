@@ -1,63 +1,55 @@
-const TablaReservaciones = ({ datos }) => {
-    return (
-        <div className="card shadow mb-4">
-            <div className="card-header py-3">
-                <div className="d-flex align-items-center justify-content-between mb-3">
-                    <h6 className="m-0 font-weight-bold text-primary title-text-color">Administración de Reservas</h6>
-                    <input type="date" className="form-control w-25" style={{ marginRight: '10px'  }} />
-                    <button className="btn btn-primary">Agregar Reserva</button>
-                </div>
-            </div>
+import React from 'react';
 
-            <div className="card-body">
-                <div className="table-responsive">
-                    <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
-                        <thead>
-                            <tr>
-                                <th>Nombre Huésped</th>
-                                <th>Check-in - Check-out</th>
-                                <th>Hora</th>
-                                <th>Tipo</th>
-                                <th>Número</th>
-                                <th>Pago Adeudado</th>
-                                <th>Status</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre Huésped</th>
-                                <th>Check-in - Check-out</th>
-                                <th>Hora</th>
-                                <th>Tipo</th>
-                                <th>Número</th>
-                                <th>Pago Adeudado</th>
-                                <th>Status</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            {/* Mapeo de datos dinámicos */}
-                            {datos.map((reserva) => (
-                                <tr key={reserva.id}>
-                                    <td>{reserva.nombreHuesped}</td>
-                                    <td>{reserva.checkIn} - {reserva.checkOut}</td>
-                                    <td>{reserva.hora}</td>
-                                    <td>{reserva.tipo}</td>
-                                    <td>{reserva.numero}</td>
-                                    <td>{reserva.pagoAdeudado}</td>
-                                    <td>{reserva.status}</td>
-                                    <td>
-                                        <button type="button" className="btn btn-success">Confirmar</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    );
+const TablaReservaciones = ({ datos }) => {
+  return (
+    <div className="container mt-4">
+      <h2 className="mb-3">Reservas</h2>
+      <table className="table table-striped table-bordered text-center">
+        <thead className="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Plataforma</th>
+            <th>Cliente</th>
+            <th>Email</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Adultos</th>
+            <th>Niños</th>
+            <th>Tinaja</th>
+            <th>Medio de Pago</th>
+            <th>Tipo Cabaña</th>
+            <th>Pago</th>
+            <th>IVA</th>
+            <th>Total</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {datos.map((reserva, index) => (
+            <tr key={index}>
+              <td>{reserva.id}</td>
+              <td>{reserva.plataforma}</td>
+              <td>{reserva.nombreHuesped}</td>
+              <td>{reserva.email}</td>
+              <td>{reserva.checkIn}</td>
+              <td>{reserva.checkOut}</td>
+              <td>{reserva.cantidadAdultos}</td>
+              <td>{reserva.cantidadNiños}</td>
+              <td>{reserva.tinaja}</td>
+              <td>{reserva.medioPago}</td>
+              <td>{reserva.tipo}</td>
+              <td className="text-danger fw-bold">${reserva.pago.toLocaleString()}</td>
+              <td className="text-danger fw-bold">{reserva.iva}%</td>
+              <td className="text-danger fw-bold">${reserva.pagoTotal.toLocaleString()}</td>
+              <td className={`fw-bold ${reserva.status === 'Reservada' ? 'text-success' : 'text-danger'}`}>
+                {reserva.status}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default TablaReservaciones;

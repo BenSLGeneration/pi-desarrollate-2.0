@@ -1,14 +1,71 @@
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TablaReservaciones from '../../components/TablaReservaciones/TablaReservaciones'; // Ajusta la ruta según tu estructura de carpetas
 
 const Reservaciones = () => {
-  // Datos de ejemplo para reservas
-  const datosReservas = [
-    { id: 1, nombreHuesped: 'Juan Pérez', checkIn: '01/01/2025', checkOut: '02/01/2025', hora: '21:30pm', tipo: 'Tinycabin', numero: '#B05', pagoAdeudado: '$120.000', status: 'Confirmado' },
-    { id: 2, nombreHuesped: 'Ana Gómez', checkIn: '03/01/2025', checkOut: '04/01/2025', hora: '11:30am', tipo: 'Dual cabin', numero: '#B06', pagoAdeudado: '$100.000', status: 'Pendiente' },
-    // Agrega más datos de ejemplo aquí
-  ];
+  // Estado para los datos de reservas
+  const [datosReservas, setDatosReservas] = useState([]);
+
+  useEffect(() => {
+    // Simulación de llamada a la API para obtener los datos de reservas
+    const reservas = [
+      {
+        id: 1,
+        nombreHuesped: 'Juan Pérez',
+        email: 'juan@example.com',
+        checkIn: '20/08/2024',
+        checkOut: '22/08/2024',
+        tipo: 'Tinycabin',
+        pago: 50000,
+        iva: 19,
+        pagoTotal: 59500,
+        status: 'Reservada',
+        plataforma: 'Booking',
+        medioPago: 'Tarjeta de Crédito (Visa)',
+        cantidadAdultos: 2,
+        cantidadNiños: 1,
+        tinaja: '✅'
+      },
+      {
+        id: 2,
+        nombreHuesped: 'María López',
+        email: 'maria@example.com',
+        checkIn: '05/09/2024',
+        checkOut: '10/09/2024',
+        tipo: 'Cabaña Deluxe',
+        pago: 0,
+        iva: 0,
+        pagoTotal: 0,
+        status: 'Cancelada',
+        plataforma: 'Airbnb',
+        medioPago: 'Transferencia Bancaria',
+        cantidadAdultos: 3,
+        cantidadNiños: 2,
+        tinaja: '❌'
+      },
+      {
+        id: 3,
+        nombreHuesped: 'Carlos Sánchez',
+        email: 'carlos@example.com',
+        checkIn: '15/07/2024',
+        checkOut: '18/07/2024',
+        tipo: 'Suite Premium',
+        pago: 100000,
+        iva: 19,
+        pagoTotal: 119000,
+        status: 'Cancelada',
+        plataforma: 'Expedia',
+        medioPago: 'Tarjeta de Débito (Mastercard)',
+        cantidadAdultos: 1,
+        cantidadNiños: 0,
+        tinaja: '✅'
+      },
+      // Agrega más datos si es necesario
+    ];
+
+    setDatosReservas(reservas);
+  }, []);
 
   return (
     <div>
