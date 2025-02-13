@@ -17,11 +17,9 @@ mongoose.connect(process.env.MONGO_URI)
 // Importar rutas
 const userRoutes = require("./routes/userRoutes");
 const reservationRoutes = require("./routes/reservationRoutes"); // Asegúrate de agregar esta línea
-const cabinRoutes = require("./routes/cabinRoutes"); // Importar rutas de cabañas
 const clientRoutes = require("./routes/clientRoutes"); // Importar rutas de clientes
 app.use("/api/users", userRoutes);
 app.use("/api/reservations", reservationRoutes); // Agregar la ruta de reservas
-app.use("/api/cabins", cabinRoutes); // Registrar rutas en la API
 app.use("/api/clients", clientRoutes); // Registrar rutas en la API
 
 // Iniciar el servidor
