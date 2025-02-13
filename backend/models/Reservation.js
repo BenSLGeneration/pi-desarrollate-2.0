@@ -11,9 +11,9 @@ const reservationSchema = new mongoose.Schema({
     required: true 
   },
   clientDocumentNumber: { 
-    type: String, 
+    type: String,
     required: true, 
-    ref: "Client" 
+    ref: "Client"
   },
   checkinDate: { 
     type: Date, 
