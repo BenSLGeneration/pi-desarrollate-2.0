@@ -4,6 +4,7 @@ const cabinController = require("../controllers/cabinController");
 
 // Rutas para peticiones 
 
+router.post('/', cabinController.createCabin);
 
 
 
