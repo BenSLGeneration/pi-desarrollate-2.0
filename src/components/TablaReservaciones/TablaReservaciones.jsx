@@ -1,4 +1,5 @@
 import React from 'react';
+import "../TablaReservaciones/TablaReservaciones.css";
 
 const TablaReservaciones = ({ datos }) => {
   return (
