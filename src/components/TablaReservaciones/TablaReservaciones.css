@@ -1,28 +1,111 @@
+/* Estilo global para el body */
 body {
     overflow: hidden;
     width: 100vw;
 }
 
-/* .table-responsive table {
-    width: 100%;
-    table-layout: fixed;
-    word-wrap: break-word;
-} */
-
+/* Estilo para la primera columna */
 th:first-child,
 td:first-child {
-    font-size: 12px; /* Smaller text */
-    text-align: center;
+    font-size: 12px; /* Texto más pequeño */
+    text-align: center; /* Alineación centrada */
 }
 
-th, td {
-    padding: 4px 6px; /* Slightly tighter */
+/* Estilo general para todas las celdas */
+th,
+td {
+    padding: 4px 6px; /* Espaciado ajustado */
+    min-width: 100px; /* Ancho mínimo para evitar contracción */
+    word-wrap: break-word; /* Divide palabras largas si es necesario */
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
 }
 
-.table th, .table td {
-    padding-left: 1rem !important;
+/* Estilo específico para la tabla */
+.table {
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+}
+
+.table th,
+.table td {
+    padding-left: 1.5rem !important;
     padding-right: 1rem !important;
-    padding-top: 1.5rem !important;  /* Force vertical spacing */
-    padding-bottom: 1.5rem !important;
-  }
-  
+    padding-top: 0.5rem !important; /* Espaciado vertical */
+    padding-bottom: 0.5rem !important;
+}
+
+/* Definir anchos mínimos para cada columna */
+.table th:nth-child(1),
+.table td:nth-child(1) {
+    min-width: 50px; /* Columna # */
+}
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    min-width: 100px; /* Columna Plataforma */
+}
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    min-width: 150px; /* Columna Cliente */
+}
+.table th:nth-child(4),
+.table td:nth-child(4) {
+    min-width: 150px; /* Columna Email */
+}
+.table th:nth-child(5),
+.table td:nth-child(5) {
+    min-width: 100px; /* Columna Check-in */
+}
+.table th:nth-child(6),
+.table td:nth-child(6) {
+    min-width: 100px; /* Columna Check-out */
+}
+.table th:nth-child(7),
+.table td:nth-child(7) {
+    min-width: 50px; /* Columna Adultos */
+}
+.table th:nth-child(8),
+.table td:nth-child(8) {
+    min-width: 50px; /* Columna Niños */
+}
+.table th:nth-child(9),
+.table td:nth-child(9) {
+    min-width: 50px; /* Columna Tinaja */
+}
+.table th:nth-child(10),
+.table td:nth-child(10) {
+    min-width: 100px; /* Columna Medio de Pago */
+}
+.table th:nth-child(11),
+.table td:nth-child(11) {
+    min-width: 100px; /* Columna Tipo Cabaña */
+}
+.table th:nth-child(12),
+.table td:nth-child(12) {
+    min-width: 100px; /* Columna Pago */
+}
+.table th:nth-child(13),
+.table td:nth-child(13) {
+    min-width: 50px; /* Columna IVA */
+}
+.table th:nth-child(14),
+.table td:nth-child(14) {
+    min-width: 100px; /* Columna Total */
+}
+.table th:nth-child(15),
+.table td:nth-child(15) {
+    min-width: 100px; /* Columna Estado */
+}
+
+/* Estilo para la fila vacía */
+.table tbody tr td[colspan] {
+    text-align: center; /* Centra el texto */
+    font-size: 14px; /* Tamaño de texto adecuado */
+    padding: 1rem; /* Espaciado vertical */
+    min-height: 50px; /* Altura mínima para evitar contracción */
+}
+
+/* Establecer un ancho mínimo para las columnas */
+.table th,
+.table td {
+    min-width: 100px; /* Ajusta este valor según tus necesidades */
+}
+
