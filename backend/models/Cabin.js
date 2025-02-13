@@ -38,4 +38,4 @@ const cabinSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Cabin", cabinSchema);
+module.exports = mongoose.model("Cabin", cabinSchema); // <-- Esto debe estar así
