@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { createUser, createReservation } = require("../controllers/userController");
+const { createUser, getUsers, getUserById, updateUser, deleteUser } = require("../controllers/userController");
 
-router.post("/", createUser);  // Aquí se define el endpoint POST
-
-
-
+router.post("/", createUser);
+router.get("/", getUsers);
+router.get("/:id", getUserById);
+router.put("/:id", updateUser);
+router.delete("/:id", deleteUser);
 
 module.exports = router;
