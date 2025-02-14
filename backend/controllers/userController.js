@@ -2,43 +2,41 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// Función para crear un usuario
 const createUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
-    // Validar campos requeridos
     if (!name || !email || !password) {
         return res.status(400).json({ message: "Por favor, rellene todos los campos." });
     }
 
-    // Verificar si el correo ya está registrado
     const userExists = await User.findOne({ email });
     if (userExists) {
         return res.status(400).json({ message: "El usuario ya existe." });
     }
 
+    if (role && !["usuario", "admin"].includes(role)) {
+        return res.status(400).json({ message: "Rol no válido." });
+    }
+
     try {
-        // Encriptar la contraseña
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Crear un nuevo usuario
         const newUser = new User({
             name,
             email,
             password: hashedPassword,
+            role: role || "usuario"  
         });
 
         await newUser.save();
 
-        // Generar JWT
         const token = jwt.sign(
-            { id: newUser._id, role: newUser.role }, // Payload del token
-            process.env.JWT_SECRET, // Clave secreta
-            { expiresIn: "1h" } // Expiración del token
+            { id: newUser._id, role: newUser.role }, 
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
         );
 
-        // Respuesta exitosa
         res.status(201).json({ message: "Usuario creado exitosamente", token });
     } catch (error) {
         console.error(error);
@@ -46,10 +44,9 @@ const createUser = async (req, res) => {
     }
 };
 
-// Obtener todos los usuarios
 const getUsers = async (req, res) => {
     try {
-        const users = await User.find().select("-password"); // Excluir contraseñas
+        const users = await User.find().select("-password"); 
         res.status(200).json(users);
     } catch (error) {
         console.error(error);
@@ -57,10 +54,9 @@ const getUsers = async (req, res) => {
     }
 };
 
-// Obtener un usuario por ID
 const getUserById = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id).select("-password"); // Excluir contraseña
+        const user = await User.findById(req.params.id).select("-password"); 
         if (!user) {
             return res.status(404).json({ message: "Usuario no encontrado." });
         }
@@ -71,9 +67,8 @@ const getUserById = async (req, res) => {
     }
 };
 
-// Actualizar un usuario
 const updateUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     try {
         const user = await User.findById(req.params.id);
@@ -81,12 +76,14 @@ const updateUser = async (req, res) => {
             return res.status(404).json({ message: "Usuario no encontrado." });
         }
 
-        // Actualizar campos
         if (name) user.name = name;
         if (email) user.email = email;
         if (password) {
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
+        }
+        if (role && ["usuario", "admin"].includes(role)) {
+            user.role = role;
         }
 
         await user.save();
@@ -97,7 +94,6 @@ const updateUser = async (req, res) => {
     }
 };
 
-// Eliminar un usuario
 const deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
