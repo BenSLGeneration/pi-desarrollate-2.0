@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TablaReservaciones from '../../components/TablaReservaciones/TablaReservaciones'; // Ajusta la ruta según tu estructura de carpetas
+import "../Reservaciones/Reservaciones.css"
 
 const Reservaciones = () => {
   // Estado para los datos de reservas
@@ -71,12 +72,8 @@ const Reservaciones = () => {
     <div>
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
-          <div id="ESPACIO VACÍO">
+          <div className="espacio-vacio">
             {/* Main Content */}
-            <div className="container-fluid">
-              <h1 className="h3 mb-2 text-gray-800">Reservaciones</h1>
-              <p className="mb-4">Administración de las reservas de los huéspedes.</p>
-            </div>
           </div>
 
           {/* Pasar datos a la tabla */}
