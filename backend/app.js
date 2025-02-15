@@ -8,35 +8,31 @@ dotenv.config();
 const app = express();
 
 // Middleware para manejar el cuerpo de las peticiones
-app.use(express.json()); // Para JSON
-app.use(express.urlencoded({ extended: true })); // Para datos de formularios
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Conexión a MongoDB Atlas
 const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
     .connect(MONGO_URI, {
-        useNewUrlParser: true, // Opción para usar el nuevo parser de URL de MongoDB
-        useUnifiedTopology: true, // Opción para usar el motor de topología unificada
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     })
     .then(() => console.log("MongoDB conectado"))
     .catch((err) => console.error("Error al conectar a MongoDB:", err));
 
-// Importar rutas
+// Importar rutas (solo una vez cada una)
 const userRoutes = require("./routes/userRoutes");
-const reservationRoutes = require("./routes/reservationRoutes"); // Asegúrate de agregar esta línea
-const clientRoutes = require("./routes/clientRoutes"); // Importar rutas de clientes
-const cabinRoutes = require("./routes/cabinRoutes"); // Importar rutas de cabinas
 const reservationRoutes = require("./routes/reservationRoutes");
 const clientRoutes = require("./routes/clientRoutes");
+const cabinRoutes = require("./routes/cabinRoutes");
 
-// Registrar rutas en la API
+// Registrar rutas en la API (solo una vez cada una)
 app.use("/api/users", userRoutes);
-app.use("/api/reservations", reservationRoutes); // Agregar la ruta de reservas
-app.use("/api/clients", clientRoutes); // Registrar rutas en la API
-app.use("/api/cabinas", cabinRoutes); // Registrar rutas en la API
 app.use("/api/reservations", reservationRoutes);
 app.use("/api/clients", clientRoutes);
+app.use("/api/cabins", cabinRoutes); // Corrección: "cabinas" -> "cabins" (para mantener consistencia en inglés)
 
 // Ruta de prueba para verificar que el servidor está funcionando
 app.get("/", (req, res) => {
