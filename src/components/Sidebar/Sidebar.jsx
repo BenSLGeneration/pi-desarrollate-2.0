@@ -19,6 +19,7 @@ const Sidebar = () => {
         src="https://www.chelenko.com/wp-content/uploads/2020/12/logo_CHELENKO-copy-White-Final-1536x1063.png"
         alt="logo chelenko"
         height="50"
+        weight="auto"
       />
       <ul className="nav flex-column">
         <li className="nav-item">
