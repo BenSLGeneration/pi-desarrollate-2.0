@@ -202,6 +202,7 @@ select {
   min-width: 120px;
   border: 1px solid transparent;
   margin-left: -4px;
+  font-weight: bold;
 }
 
 .status-pill.confirmado {
@@ -211,9 +212,9 @@ select {
 }
 
 .status-pill.pendiente {
-  background-color: #FFF8E6;
-  color: #FF991F;
-  border-color: #FFE3A3;
+  background-color: #FFEDC0;
+  color: #FF6C00;
+  border-color: #FFCC59;
 }
 
 .status-pill.desvinculado {
@@ -239,3 +240,4 @@ select {
   padding-bottom: 3px;
   border-radius: 10px;
 }
+

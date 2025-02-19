@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TablaPermisos from "../TablaPermisos/TablaPermisos";
 
-const PaginacionPermisos = ({ datos }) => {
+const PaginacionPermisos = ({ datos, onView, onEdit, onUnlink, onConfirm, onCancelEdit }) => {
   const [paginaActual, setPaginaActual] = useState(1);
   const usuariosPorPagina = 10;
 
@@ -16,21 +16,27 @@ const PaginacionPermisos = ({ datos }) => {
   return (
     <div>
       {/* Renderiza la tabla con solo los usuarios de la página actual */}
-      <TablaPermisos datos={usuariosPaginados} />
-
+      <TablaPermisos
+        datos={usuariosPaginados}
+        onView={onView}
+        onEdit={onEdit}
+        onUnlink={onUnlink}
+        onConfirm={onConfirm}
+        onCancelEdit={onCancelEdit} 
+      />
       {/* Controles de paginación */}
       <div className="d-flex justify-content-center mt-3">
-        <button 
-          className="btn btn-primary mx-1" 
-          onClick={() => setPaginaActual(paginaActual - 1)} 
+        <button
+          className="btn btn-primary mx-1"
+          onClick={() => setPaginaActual(paginaActual - 1)}
           disabled={paginaActual === 1}
         >
           Anterior
         </button>
         <span className="mx-2">Página {paginaActual} de {totalPaginas}</span>
-        <button 
-          className="btn btn-primary mx-1" 
-          onClick={() => setPaginaActual(paginaActual + 1)} 
+        <button
+          className="btn btn-primary mx-1"
+          onClick={() => setPaginaActual(paginaActual + 1)}
           disabled={paginaActual === totalPaginas}
         >
           Siguiente
