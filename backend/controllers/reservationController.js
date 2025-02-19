@@ -1,19 +1,53 @@
 const Reservation = require("../models/Reservation");
 const Cabin = require("../models/Cabin");
 const Client = require("../models/Client");
+const Payment = require("../models/Payment");
+
 
 // Obtener todas las reservas
 exports.getAllReservations = async (req, res) => {
     try {
-        const reservations = await Reservation.find()
-            .populate("cabin"); // Solo hacer populate para los campos que son ObjectIds
-        console.log('Reservas obtenidas:', reservations);
-        res.status(200).json(reservations);
+        const reservations = await Reservation.find().populate("cabin");
+
+        // Buscar datos adicionales manualmente
+        const formattedReservations = await Promise.all(reservations.map(async (reservation) => {
+            // Buscar cliente manualmente por su documentNumber
+            const client = await Client.findOne({ documentNumber: reservation.clientDocumentNumber });
+            // Buscar pago asociado a la reserva
+            const payment = await Payment.findOne({ reservation: reservation._id });
+
+            // Calcular IVA si el huésped es chileno
+            const isChilean = client?.nationality === "Chilena";
+            const iva = isChilean ? (payment?.amount || 0) * 0.19 : 0;
+            const total = (payment?.amount || 0) + iva;
+
+            return {
+                _id: reservation._id,
+                client: client?.name || "Sin nombre",
+                email: client?.email || "No disponible",
+                checkinDate: reservation.checkinDate,
+                checkoutDate: reservation.checkoutDate,
+                adults: reservation.adults,
+                children: reservation.children,
+                hasHotTub: reservation.hasHotTub,
+                paymentMethod: reservation.paymentMethod,
+                cabinType: reservation.cabin?.type || "Desconocido",
+                paymentAmount: payment?.amount || 0,
+                iva,
+                total,
+                status: reservation.cabin?.status || "Desconocido"  // Aquí corregimos para usar el status real de la cabaña
+            };
+        }));
+
+        res.status(200).json(formattedReservations);
     } catch (error) {
         console.error('Error al obtener las reservas:', error);
         res.status(500).json({ message: "Error al obtener las reservas", error: error.message });
     }
 };
+
+
+
 
 
 
