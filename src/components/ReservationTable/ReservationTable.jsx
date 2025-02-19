@@ -1,12 +1,37 @@
-import "../../views/Dashboard/Dashboard.css"
+import { useState, useEffect } from 'react';
+import api from '../../api/axios';
+import TablaReservaciones from '../TablaReservaciones/TablaReservaciones';
+import Dashboard from "../../views/Dashboard/Dashboard.css";
 
 const ReservationTable = () => {
-    const reservations = [
-        { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
-        { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
-        { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
-        { name: 'Nombre Apellido', checkInOut: '01/01/2025 - 02/01/2025', type: 'Single Bed', room: '#B02', payment: '$000000' },
-    ];
+    const [reservations, setReservations] = useState([]);
+
+    useEffect(() => {
+        const fetchReservations = async () => {
+            try {
+                const response = await api.get('/Dashboard');
+                console.log(response.data);
+
+                const formattedReservations = response.data.map(reserva => ({
+                    id: reserva._id,
+                    nombreHuesped: reserva.client || 'Sin nombre',
+                    checkIn: reserva.checkinDate,
+                    checkOut: reserva.checkoutDate,
+                    tipo: reserva.cabinType || 'Desconocido',
+                    pago: reserva.paymentAmount || 0,
+                    iva: reserva.iva || 0,
+                    pagoTotal: reserva.total || 0,
+                    medioPago: reserva.paymentMethod
+                }));
+                setReservations(formattedReservations);
+
+            } catch (error) {
+                console.error('Error al obtener las reservas: ', error);
+            }
+        };
+
+        fetchReservations();
+    }, []);
 
     return (
         <div className="container my-4">
@@ -21,19 +46,25 @@ const ReservationTable = () => {
                     <table className="table table-hover table-borderless">
                         <thead className="table-light">
                             <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Check In / Check Out</th>
-                                <th scope="col">Cabaña</th>
-                                <th scope="col">Monto Total</th>
+                            <th scope='col'>Nombre</th>
+                            <th scope='col'>Check In - Check Out</th>
+                            <th scope='col'>Tipo de Cabaña</th>
+                            <th scope='col'>Pago</th>
+                            <th scope='col'>IVA</th>
+                            <th scope='col'>Monto Total</th>
+                            <th scope='col'>Medio de Pago</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {reservations.map((reservation, index) => (
-                                <tr key={index}>
-                                    <td>{reservation.name}</td>
-                                    <td>{reservation.checkInOut}</td>
-                                    <td>{reservation.type}</td>
-                                    <td>{reservation.payment}</td>
+                            {reservations.map((reserva) => (
+                                <tr key={reserva.id}>
+                                    <td>{reserva.nombreHuesped}</td>
+                                    <td>{reserva.checkIn} - {reserva.checkOut}</td>
+                                    <td>{reserva.tipo}</td>
+                                    <td>${reserva.pago.toFixed(2)}</td>
+                                    <td>${reserva.iva.toFixed(2)}</td>
+                                    <td>${reserva.pagoTotal.toFixed(2)}</td>
+                                    <td>{reserva.medioPago}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -43,5 +74,7 @@ const ReservationTable = () => {
         </div>
     );
 };
+
+
 
 export default ReservationTable;
