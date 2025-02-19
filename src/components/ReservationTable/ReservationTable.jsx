@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import api from '../../api/axios';
-import TablaReservaciones from '../TablaReservaciones/TablaReservaciones';
-import Dashboard from "../../views/Dashboard/Dashboard.css";
 
 const ReservationTable = () => {
     const [reservations, setReservations] = useState([]);
@@ -9,7 +7,7 @@ const ReservationTable = () => {
     useEffect(() => {
         const fetchReservations = async () => {
             try {
-                const response = await api.get('/Dashboard');
+                const response = await api.get('/reservations');
                 console.log(response.data);
 
                 const formattedReservations = response.data.map(reserva => ({
@@ -47,7 +45,8 @@ const ReservationTable = () => {
                         <thead className="table-light">
                             <tr>
                             <th scope='col'>Nombre</th>
-                            <th scope='col'>Check In - Check Out</th>
+                            <th scope='col'>Check In</th>
+                            <th scope='col'>Check Out</th>
                             <th scope='col'>Tipo de Cabaña</th>
                             <th scope='col'>Pago</th>
                             <th scope='col'>IVA</th>
@@ -59,7 +58,8 @@ const ReservationTable = () => {
                             {reservations.map((reserva) => (
                                 <tr key={reserva.id}>
                                     <td>{reserva.nombreHuesped}</td>
-                                    <td>{reserva.checkIn} - {reserva.checkOut}</td>
+                                    <td>{reserva.checkIn}</td>
+                                    <td>{reserva.checkOut}</td>
                                     <td>{reserva.tipo}</td>
                                     <td>${reserva.pago.toFixed(2)}</td>
                                     <td>${reserva.iva.toFixed(2)}</td>
