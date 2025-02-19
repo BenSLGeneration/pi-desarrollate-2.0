@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import "../../views/Dashboard/Dashboard.css"
 
 const SummaryCard = ({ icon, title, value, color }) => {
