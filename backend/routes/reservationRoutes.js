@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const reservationController = require("../controllers/reservationController");
 
-// Obtener todas las reservas
+// Rutas para reservas
 router.get("/", reservationController.getAllReservations);
-
-// Agregar una nueva reserva
 router.post("/", reservationController.addReservation);
+router.get("/:id", reservationController.getReservationById);
+router.put("/:id", reservationController.updateReservation);
+router.delete("/:id", reservationController.deleteReservation);
 
 module.exports = router;
