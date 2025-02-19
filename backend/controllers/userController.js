@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { removeListener } = require("../models/Client");
 
 const createUser = async (req, res) => {
     const { name, email, password, role } = req.body;
@@ -28,14 +29,16 @@ const createUser = async (req, res) => {
             password: hashedPassword,
             role: role || "usuario"  
         });
-
+       
         await newUser.save();
-
+        console.log("Role del usuario:", newUser.role);
+       
         const token = jwt.sign(
             { id: newUser._id, role: newUser.role }, 
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
+        console.log("Token generado:", token);
 
         res.status(201).json({ message: "Usuario creado exitosamente", token });
     } catch (error) {
@@ -43,6 +46,54 @@ const createUser = async (req, res) => {
         res.status(500).json({ message: "Error al crear el usuario." });
     }
 };
+
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Busca al usuario por su email
+        const findUser = await User.findOne({ email: email });
+
+        // Verifica si el usuario existe
+        if (!findUser) {
+            return res.status(400).json({ message: "Usuario no encontrado" });
+        }
+
+        // Compara la contraseña proporcionada con la almacenada en la base de datos
+        const passVerifi = bcrypt.compareSync(password, findUser.password);
+        if (!passVerifi) {
+            return res.status(400).json({ message: "Contraseña incorrecta" });
+        }
+
+        // Generar el token con el campo "role" correcto
+        const token = jwt.sign(
+            { id: findUser._id, role: findUser.role }, // Campo correcto: "role"
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        // Enviar el token en una cookie y en la respuesta JSON
+        res.status(200)
+            .cookie("token", token, {
+                httpOnly: true, // La cookie solo es accesible desde el servidor
+                secure: false, // Cambia a true si estás usando HTTPS
+                maxAge: 3600000 // Tiempo de expiración de la cookie (1 hora)
+            })
+            .json({
+                message: "Usuario Logeado",
+                data: {
+                    name: findUser.name,
+                    id: findUser._id,
+                    token: token // También envías el token en la respuesta JSON
+                }
+            });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error en el servidor" });
+    }
+};
+
+
 
 const getUsers = async (req, res) => {
     try {
@@ -107,4 +158,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { createUser, getUsers, getUserById, updateUser, deleteUser };
+module.exports = { createUser, getUsers, getUserById, updateUser, deleteUser, loginUser };
