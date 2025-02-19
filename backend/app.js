@@ -27,12 +27,14 @@ const userRoutes = require("./routes/userRoutes");
 const reservationRoutes = require("./routes/reservationRoutes");
 const clientRoutes = require("./routes/clientRoutes");
 const cabinRoutes = require("./routes/cabinRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 // Registrar rutas en la API (solo una vez cada una)
 app.use("/api/users", userRoutes);
 app.use("/api/reservations", reservationRoutes);
 app.use("/api/clients", clientRoutes);
 app.use("/api/cabins", cabinRoutes); // Corrección: "cabinas" -> "cabins" (para mantener consistencia en inglés)
+app.use("/api/payments", paymentRoutes);
 
 // Ruta de prueba para verificar que el servidor está funcionando
 app.get("/", (req, res) => {
