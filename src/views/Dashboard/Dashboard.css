@@ -1,3 +1,9 @@
+h2 {
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
+}
+
 /* Estilos para las tarjetas de resumen */
 .summary-card {
     padding: 1.5rem;
@@ -6,13 +12,15 @@
     transition: transform 0.2s ease-in-out;
 }
 
-  /* Ensure Sidebar stays fixed on the left */
-  .sidebar {
-    width: 250px; /* Ajusta el ancho */
+/* Ensure Sidebar stays fixed on the left */
+.sidebar {
+    width: 250px;
+    /* Ajusta el ancho */
     background-color: white;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Separa la Sidebar del contenido principal */
-  }
+    margin-bottom: 20px;
+    /* Separa la Sidebar del contenido principal */
+}
 
 .summary-card:hover {
     transform: translateY(-5px);

@@ -25,7 +25,7 @@ const cabinSchema = new mongoose.Schema({
   },
   status: { 
     type: String, 
-    enum: ["Disponible", "Ocupada", "Mantenimiento"], 
+    enum: ["Reservada", "Cancelada"], 
     default: "Disponible" 
   },
   price: { 

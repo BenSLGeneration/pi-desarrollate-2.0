@@ -9,11 +9,25 @@ import "../../views/Dashboard/Dashboard.css";
 const Dashboard = () => {
   return (
     <div className="content-container flex-grow-1 p-5">
-    <GeneralSummary />
-    <ReservationTable />
-    <AdminPanel />
-    <UserProfile />
-  </div>
+      <h2>Welcome!</h2>
+      <div className="container">
+      <ReservationTable />
+      </div>
+      <div className="container">
+        <div className="row">
+          {/* Primera columna: ReservationTable y AdminPanel */}
+          <div className="col-lg-8 d-flex flex-column">
+            <AdminPanel />
+          </div>
+          {/* Segunda columna: SummaryCard */}
+          <div className="col-lg-4 d-flex">
+            <UserProfile />
+          </div>
+        </div>
+      </div>
+
+
+    </div>
   );
 };
 

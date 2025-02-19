@@ -23,9 +23,8 @@ const ReservationTable = () => {
                             <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Check In / Check Out</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Habitación</th>
-                                <th scope="col">Pago Adeudado</th>
+                                <th scope="col">Cabaña</th>
+                                <th scope="col">Monto Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,7 +33,6 @@ const ReservationTable = () => {
                                     <td>{reservation.name}</td>
                                     <td>{reservation.checkInOut}</td>
                                     <td>{reservation.type}</td>
-                                    <td>{reservation.room}</td>
                                     <td>{reservation.payment}</td>
                                 </tr>
                             ))}
