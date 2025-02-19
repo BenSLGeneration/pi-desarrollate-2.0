@@ -1,0 +1,239 @@
+[33mcommit 3115896837bbf95a133b0d058d7f74bdda722a67[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mconexion-benja[m[33m)[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Wed Feb 19 11:35:59 2025 -0300
+
+    porfin trae datos de bd
+
+[33mcommit 1d6e88102c24d71caf6e918a7c8c116d4beb98dd[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Wed Feb 19 10:21:19 2025 -0300
+
+    Terminados controladores de reservation
+
+[33mcommit 0fe4df76315917b05ab7e225de9888cdfff470bc[m[33m ([m[1;31morigin/conexion-benja[m[33m)[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 18 16:53:12 2025 -0300
+
+    payment hecho
+
+[33mcommit 6c04443e867b0be8da7b9c5074c80a2c72978935[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 18 16:52:58 2025 -0300
+
+    payment hecho
+
+[33mcommit a438b5847fe5ccc06bb9e1e56f051f9b332856c1[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 18 16:43:05 2025 -0300
+
+    cambios
+
+[33mcommit 02cd258f4669de4eace9daa510b49e76d5c0d233[m
+Author: Lucas Castillo <lucas.castillo@genstudenst.org>
+Date:   Sat Feb 15 15:57:59 2025 -0300
+
+    ocultar .env
+
+[33mcommit 80167ebf4b2826b1fac1a9ff12126c1e9158dcb4[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Sat Feb 15 15:40:34 2025 -0300
+
+    Arreglado error de app
+
+[33mcommit 99b8cd454be45080bb0999d962d35931b52d7491[m
+Merge: f7da2ce d6b3890
+Author: Bast <bastian.penaloza@genstudents.org>
+Date:   Fri Feb 14 12:33:04 2025 -0300
+
+    Merge branch 'back-bast'
+
+[33mcommit d6b3890950ecd1d997d852b79e0cdedd78e2ee34[m[33m ([m[1;31morigin/back-bast[m[33m)[m
+Author: Bast <bastian.penaloza@genstudents.org>
+Date:   Fri Feb 14 12:27:15 2025 -0300
+
+    Agregar rol de usuario en la creación y actualización de usuarios
+
+[33mcommit f7da2cee80a184fe4aa08888c3b7c22c28880bbd[m
+Merge: 6bfc40a 8a7fb26
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Fri Feb 14 09:35:08 2025 -0300
+
+    Merge branch 'backend-vale'
+
+[33mcommit 6bfc40a88b9c181aad18233582e62df8cd3f43c3[m
+Merge: d1144b8 771a1ee
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Fri Feb 14 09:26:50 2025 -0300
+
+    Merge pull request #8 from BenSLGeneration/reservaciones-nicolas
+    
+    Arreglado como se ve la tabla,
+
+[33mcommit a891015cf73af0d225b0eb39125ccff805896056[m
+Author: Bast <bastian.penaloza@genstudents.org>
+Date:   Thu Feb 13 21:08:38 2025 -0300
+
+    Actualizar variables de entorno y agregar nuevas dependencias en package.json
+
+[33mcommit c59bd7f6d60c1fabddb0a8bc07eb8ae3fe5051da[m
+Author: Bast <bastian.penaloza@genstudents.org>
+Date:   Thu Feb 13 16:30:50 2025 -0300
+
+    Actualizar configuración de MongoDB, agregar autenticación JWT y CRUD de usuarios
+
+[33mcommit 771a1ee30a7f935d715ae20724a2a72c359b6012[m[33m ([m[1;31morigin/reservaciones-nicolas[m[33m)[m
+Author: NicoGenstudent <nicolas.sanchez@genstudents.org>
+Date:   Thu Feb 13 11:51:45 2025 -0300
+
+    Filtro en la pagina de reservaciones casi lista.
+
+[33mcommit 1fe16f4e6979dd6f3b5a84a13db5e622120d2aca[m
+Merge: b66034a d1144b8
+Author: NicoGenstudent <nicolas.sanchez@genstudents.org>
+Date:   Thu Feb 13 11:46:10 2025 -0300
+
+    Merge remote-tracking branch 'origin/main' into reservaciones-nicolas
+
+[33mcommit 8a7fb26fb835105bc056bf3e38af75a68ed4f8f1[m[33m ([m[1;31morigin/backend-vale[m[33m)[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Thu Feb 13 11:40:26 2025 -0300
+
+    finalizar controlador, route y agregar a app.js
+
+[33mcommit 9e666d77ba5e7bc14442429be7425ce6489e2a01[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Thu Feb 13 10:54:22 2025 -0300
+
+    desarrollo cabin controller
+
+[33mcommit bb0a6ebd39ca654c3e6eee73b44b16eb930b743f[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Thu Feb 13 10:37:53 2025 -0300
+
+    cabin controller & routes
+
+[33mcommit b1db627df59df994e5a7c990b9dc6c78b898b1df[m
+Merge: 9461a61 d1144b8
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Thu Feb 13 10:22:57 2025 -0300
+
+    Merge branch 'main' of https://github.com/BenSLGeneration/pi-desarrollate-2.0 into backend-vale
+
+[33mcommit d1144b8f676b212eb2efe3b9067ec5b65faa831c[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Thu Feb 13 10:17:27 2025 -0300
+
+    Cliente listo
+
+[33mcommit b66034abf6fcb236f2455dfb59fcdf4d4f6427fc[m
+Author: NicoGenstudent <nicolas.sanchez@genstudents.org>
+Date:   Thu Feb 13 10:00:30 2025 -0300
+
+    Arreglado como se ve la tabla,
+
+[33mcommit 730ae02b42a74c22d35d329ee6e11957bed69b1a[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Thu Feb 13 09:58:55 2025 -0300
+
+    Get de CliAents
+
+[33mcommit a9d3d3e67a79f45eff0e687af9d698c8f82b8d55[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Thu Feb 13 09:41:07 2025 -0300
+
+    Get de reservations listo
+
+[33mcommit 9461a6170d19a57649185624565f0bd369ebe18e[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Tue Feb 11 16:08:07 2025 -0300
+
+    Eliminacion de archivos malos controlador y ruta
+
+[33mcommit cbe46d53057409429b60633a0f84bea4cd835377[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Tue Feb 11 16:04:23 2025 -0300
+
+    actualizacion mongoose
+
+[33mcommit bdc90033c8811debb2df46a67a09fbbfff9c8b13[m[33m ([m[1;31morigin/reservation-benja[m[33m, [m[1;31morigin/creacion-de-usuario-nicolas[m[33m)[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 11 15:59:11 2025 -0300
+
+    aaaaayuda porfavor
+
+[33mcommit 7b6bf9f90c2d86047011220b225a81530e497c54[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Tue Feb 11 15:59:11 2025 -0300
+
+    creacion archivos modulares, controlador y ruta
+
+[33mcommit ceb2b2ab4581aeeb5cf032eb2f3710472cb16110[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Tue Feb 11 15:54:00 2025 -0300
+
+    creacion de funcion para obtener info tabla dashboard
+
+[33mcommit d8f72beb5b6a4e1b61c6913bae07718c6715612c[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Tue Feb 11 15:26:10 2025 -0300
+
+    edicion de localhost y controlador
+
+[33mcommit 14d1d19896ed4047d0c90d0ce932a0859f61de8c[m
+Author: Valentina Arancibia <valentina.arancibia@genstudents.org>
+Date:   Tue Feb 11 14:44:33 2025 -0300
+
+    instalacion de dependencias
+
+[33mcommit e6af8bc08cf53e8bebdd670b7dc9fbd44916bbf2[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 11 13:03:26 2025 -0300
+
+    antes de embarrarla
+
+[33mcommit 13b21aed7b1c378a480cb7e539701f3e481f4866[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 11 11:53:04 2025 -0300
+
+    packages-json actualizados
+
+[33mcommit 23373fa0ae949bb145628133ee1a8fb2c75db995[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 11 11:29:51 2025 -0300
+
+    Modificada tabla reservaciones
+
+[33mcommit 0483d997d1d6a2044121786c3e92f44d5e032ae5[m
+Author: BenSLGeneration <benjamin.salome@genstudents.org>
+Date:   Tue Feb 11 11:07:37 2025 -0300
+
+    models actualizados
+
+[33mcommit 2d5324d3d1cc33748967119425a884d8b0af0f7a[m
+Merge: 2e2ad7b 93ccd9c
+Author: Lucas Castillo <lucas.castillo@genstudenst.org>
+Date:   Tue Feb 11 10:37:34 2025 -0300
+
+    Merge branch 'rama-lucas2'
+
+[33mcommit 93ccd9c0c9f2354d61af3a0dbf2057adba378b42[m
+Author: Lucas Castillo <lucas.castillo@genstudenst.org>
+Date:   Tue Feb 11 10:35:42 2025 -0300
+
+    logo chelneko
+
+[33mcommit 2e2ad7ba7b5063af72afcff7c0349cd8972f0e2a[m
+Merge: 60b237b 92c2a81
+Author: NicoGenstudent <nicolas.sanchez@genstudents.org>
+Date:   Tue Feb 11 10:12:07 2025 -0300
+
+    Merge branch 'main' of https://github.com/BenSLGeneration/pi-desarrollate-2.0
+
+[33mcommit 60b237bc53fae32342e9deefc08289825d63954c[m
+Merge: 6689631 c92ae91
+Author: NicoGenstudent <nicolas.sanchez@genstudents.org>
+Date:   Tue Feb 11 10:12:04 2025 -0300
+
+    Merge branch 'creacion-de-usuario-nicolas' of https://github.com/BenSLGeneration/pi-desarrollate-2.0
+
+[33mcommit 92c2a813158f0c9bea8a9fbe37a9dc95a50a00a

@@ -16,15 +16,15 @@ const Reservaciones = () => {
                     checkIn: reserva.checkinDate,
                     checkOut: reserva.checkoutDate,
                     tipo: reserva.cabin?.type || 'Desconocido',
-                    pago: reserva.amountDue || 0,
-                    iva: reserva.tax || 19,
-                    pagoTotal: reserva.totalAmount || 0,
+                    pago: reserva.paymentAmount || 0, // Ajustado
+                    iva: reserva.iva || 19, // Ajustado
+                    pagoTotal: reserva.total || 0, // Ajustado
                     status: reserva.status || 'Pendiente',
                     plataforma: reserva.bookingPlatform || 'Directo',
                     medioPago: reserva.paymentMethod || 'No especificado',
                     cantidadAdultos: reserva.adults || 0,
                     cantidadNiños: reserva.children || 0,
-                    tinaja: reserva.hotTub ? '✅' : '❌',
+                    tinaja: reserva.hasHotTub ? '✅' : '❌',
                 }));
                 setReservations(formattedReservations);
             } catch (error) {
