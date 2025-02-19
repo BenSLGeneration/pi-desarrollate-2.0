@@ -1,87 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import TablaReservaciones from '../../components/TablaReservaciones/TablaReservaciones'; // Ajusta la ruta según tu estructura de carpetas
-import "../Reservaciones/Reservaciones.css"
+import api from '../../api/axios'; // Importa la configuración de Axios
+import TablaReservaciones from '../../components/TablaReservaciones/TablaReservaciones'; // Asegúrate de importar correctamente la tabla
 
 const Reservaciones = () => {
-  // Estado para los datos de reservas
-  const [datosReservas, setDatosReservas] = useState([]);
+    const [reservations, setReservations] = useState([]); // Estado para almacenar las reservas
 
-  useEffect(() => {
-    // Simulación de llamada a la API para obtener los datos de reservas
-    const reservas = [
-      {
-        id: 1,
-        nombreHuesped: 'Juan Pérez',
-        email: 'juan@example.com',
-        checkIn: '20/08/2024',
-        checkOut: '22/08/2024',
-        tipo: 'Tinycabin',
-        pago: 50000,
-        iva: 19,
-        pagoTotal: 59500,
-        status: 'Reservada',
-        plataforma: 'Booking',
-        medioPago: 'Tarjeta de Crédito (Visa)',
-        cantidadAdultos: 2,
-        cantidadNiños: 1,
-        tinaja: '✅'
-      },
-      {
-        id: 2,
-        nombreHuesped: 'María López',
-        email: 'maria@example.com',
-        checkIn: '05/09/2024',
-        checkOut: '10/09/2024',
-        tipo: 'Cabaña Deluxe',
-        pago: 0,
-        iva: 0,
-        pagoTotal: 0,
-        status: 'Cancelada',
-        plataforma: 'Airbnb',
-        medioPago: 'Transferencia Bancaria',
-        cantidadAdultos: 3,
-        cantidadNiños: 2,
-        tinaja: '❌'
-      },
-      {
-        id: 3,
-        nombreHuesped: 'Carlos Sánchez',
-        email: 'carlos@example.com',
-        checkIn: '15/07/2024',
-        checkOut: '18/07/2024',
-        tipo: 'Suite Premium',
-        pago: 100000,
-        iva: 19,
-        pagoTotal: 119000,
-        status: 'Cancelada',
-        plataforma: 'Expedia',
-        medioPago: 'Tarjeta de Débito (Mastercard)',
-        cantidadAdultos: 1,
-        cantidadNiños: 0,
-        tinaja: '✅'
-      },
-      // Agrega más datos si es necesario
-    ];
+    useEffect(() => {
+        const fetchReservations = async () => {
+            try {
+                const response = await api.get('/reservations');
+                const formattedReservations = response.data.map(reserva => ({
+                    id: reserva._id,
+                    nombreHuesped: reserva.client?.name || 'Sin nombre',
+                    email: reserva.client?.email || 'No disponible',
+                    checkIn: reserva.checkinDate,
+                    checkOut: reserva.checkoutDate,
+                    tipo: reserva.cabin?.type || 'Desconocido',
+                    pago: reserva.amountDue || 0,
+                    iva: reserva.tax || 19,
+                    pagoTotal: reserva.totalAmount || 0,
+                    status: reserva.status || 'Pendiente',
+                    plataforma: reserva.bookingPlatform || 'Directo',
+                    medioPago: reserva.paymentMethod || 'No especificado',
+                    cantidadAdultos: reserva.adults || 0,
+                    cantidadNiños: reserva.children || 0,
+                    tinaja: reserva.hotTub ? '✅' : '❌',
+                }));
+                setReservations(formattedReservations);
+            } catch (error) {
+                console.error("Error al obtener las reservas: ", error);
+            }
+        };
 
-    setDatosReservas(reservas);
-  }, []);
+        fetchReservations();
+    }, []);
 
-  return (
-    <div>
-      <main id="content-wrapper" className="d-flex flex-column">
-        <div id="content">
-          <div className="espacio-vacio">
-            {/* Main Content */}
-          </div>
-
-          {/* Pasar datos a la tabla */}
-          <div className='d-flex'>
-            <TablaReservaciones datos={datosReservas} />
-          </div>
+    return (
+        <div>
+            <main id="content-wrapper" className="d-flex flex-column">
+                <div id="content">
+                    <div className="espacio-vacio"></div>
+                    <div className='d-flex'>
+                        <TablaReservaciones datos={reservations} />
+                    </div>
+                </div>
+            </main>
         </div>
-      </main>
-    </div>
-  );
+    );
 };
 
 export default Reservaciones;

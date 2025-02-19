@@ -11,9 +11,8 @@ const reservationSchema = new mongoose.Schema({
     required: true 
   },
   clientDocumentNumber: { 
-    type: String,
-    required: true, 
-    ref: "Client"
+    type: String,  // Cambiado a String para almacenar el número de documento
+    required: true 
   },
   checkinDate: { 
     type: Date, 

@@ -1,11 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require('cors'); // Agrega el require de cors
 
 // Configurar variables de entorno
 dotenv.config();
 
 const app = express();
+
+// Usar CORS para permitir solicitudes desde tu front-end
+app.use(cors()); // Esto permite solicitudes desde cualquier origen
 
 // Middleware para manejar el cuerpo de las peticiones
 app.use(express.json());
@@ -33,7 +37,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 app.use("/api/users", userRoutes);
 app.use("/api/reservations", reservationRoutes);
 app.use("/api/clients", clientRoutes);
-app.use("/api/cabins", cabinRoutes); // Corrección: "cabinas" -> "cabins" (para mantener consistencia en inglés)
+app.use("/api/cabins", cabinRoutes);
 app.use("/api/payments", paymentRoutes);
 
 // Ruta de prueba para verificar que el servidor está funcionando

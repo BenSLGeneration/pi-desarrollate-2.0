@@ -6,13 +6,16 @@ const Client = require("../models/Client");
 exports.getAllReservations = async (req, res) => {
     try {
         const reservations = await Reservation.find()
-            .populate("cabin")
-            .populate("clientDocumentNumber"); // Relaciona con el cliente
+            .populate("cabin"); // Solo hacer populate para los campos que son ObjectIds
+        console.log('Reservas obtenidas:', reservations);
         res.status(200).json(reservations);
     } catch (error) {
+        console.error('Error al obtener las reservas:', error);
         res.status(500).json({ message: "Error al obtener las reservas", error: error.message });
     }
 };
+
+
 
 // Crear una nueva reserva
 exports.addReservation = async (req, res) => {
