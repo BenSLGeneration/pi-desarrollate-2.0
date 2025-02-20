@@ -5,15 +5,21 @@ import Navbar from '../../components/Navbar/Navbar';
 import CreateUserModal from '../../components/CreateUserModal/CreateUserModal';
 
 const Administracion = () => {
+
   const [lista, setLista] = useState([
-    { id: 1, nombre: 'John Doe', cargo: 'Product Owner', permisos: 'Administrador', status: 'Confirmado' },
-    { id: 2, nombre: 'Jane Smith', cargo: 'Desarrolladora', permisos: 'Personal', status: 'Pendiente' },
-    { id: 3, nombre: 'Carlos López', cargo: 'Diseñador UI', permisos: 'Personal', status: 'Confirmado' },
-    { id: 4, nombre: 'Ana Pérez', cargo: 'Scrum Master', permisos: 'Administrador', status: 'Desvinculado' },
+    { id: 1, nombre: "John Doe", cargo: "Product Owner", permisos: "Administrador", status: "Confirmado" },
+    { id: 2, nombre: "Jane Smith", cargo: "Desarrolladora", permisos: "Personal", status: "Pendiente" },
+    { id: 3, nombre: "Carlos López", cargo: "Diseñador UI", permisos: "Personal", status: "Confirmado" },
+    { id: 4, nombre: "Ana Pérez", cargo: "Scrum Master", permisos: "Administrador", status: "Desvinculado" },
   ]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filtroStatus, setFiltroStatus] = useState("all");
   const [busqueda, setBusqueda] = useState("");
+  const [usuarioEditando, setUsuarioEditando] = useState(null);
+  const [nuevoCargo, setNuevoCargo] = useState("");
+  const [nuevosPermisos, setNuevosPermisos] = useState("");
+
 
   // Función para manejar el cambio del filtro de estado
   const handleFiltroChange = (e) => {
@@ -25,7 +31,6 @@ const Administracion = () => {
     setBusqueda(e.target.value);
   };
 
-  // Filtrar datos según el estado y la búsqueda
   const datosFiltrados = lista.filter(usuario => {
     const matchesStatus = filtroStatus === "all" || 
       usuario.status.toLowerCase() === filtroStatus.toLowerCase();
@@ -58,7 +63,6 @@ const Administracion = () => {
     return matchesStatus && matchesSearch;
   });
 
-  // Función para crear un nuevo usuario
   const handleCreateUser = (userData) => {
     if (!userData.name || !userData.cargo || !userData.permisos || !userData.status) {
       alert("Todos los campos son obligatorios");
@@ -76,7 +80,73 @@ const Administracion = () => {
     setLista([...lista, nuevoUsuario]);
   };
 
-  return (
+  // Función para ver detalles de un usuario
+  const handleView = (id) => {
+    const usuario = lista.find((usuario) => usuario.id === id);
+    if (!usuario) {
+      alert("Usuario no encontrado.");
+      return;
+    }
+    alert(`Detalles del usuario:\nNombre: ${usuario.nombre}\nCargo: ${usuario.cargo}\nStatus: ${usuario.status}`);
+  };
+
+  // Función para editar un usuario
+  const handleEdit = (id, newData) => {
+    if (!newData.cargo || !newData.permisos) {
+      alert("Todos los campos son obligatorios.");
+      return;
+    }
+    const updatedLista = lista.map((usuario) =>
+      usuario.id === id ? { ...usuario, ...newData, status: "Pendiente" } : usuario
+    );
+    setLista(updatedLista);
+    setUsuarioEditando(null); // Salir del modo edición
+  };
+
+  // Función para confirmar o vincular un usuario
+  const handleConfirm = (id) => {
+    const updatedLista = lista.map((usuario) => {
+      if (usuario.id === id) {
+        if (usuario.status === "Pendiente") {
+          alert("Usuario confirmado correctamente. Se aplicaron los cambios.");
+          return { ...usuario, status: "Confirmado" };
+        } else if (usuario.status === "Desvinculado") {
+          return { ...usuario, status: "Pendiente" };
+        }
+      }
+      return usuario;
+    });
+    setLista(updatedLista);
+  };
+
+  // Función para desvincular un usuario
+  const handleUnlink = (id) => {
+    const updatedLista = lista.map((usuario) => {
+      if (usuario.id === id) {
+        if (usuario.status === "Pendiente") {
+          return { ...usuario, status: "Desvinculado" };
+        } else if (usuario.status === "Confirmado") {
+          alert("Usuario desvinculado correctamente.");
+          return { ...usuario, status: "Desvinculado" };
+        }
+      }
+      return usuario;
+    });
+    setLista(updatedLista);
+  };
+
+  // Función para cancelar la edición
+  const handleCancelEdit = (id) => {
+    const usuarioOriginal = lista.find((usuario) => usuario.id === id);
+    if (!usuarioOriginal) {
+      alert("Error al restaurar los datos originales.");
+      return;
+    }
+    setLista(lista.map((usuario) => (usuario.id === id ? usuarioOriginal : usuario)));
+    setUsuarioEditando(null); // Salir del modo edición
+  };
+
+    return (
     <div>
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
