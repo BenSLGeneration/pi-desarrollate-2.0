@@ -12,17 +12,37 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate(); // Hook de React Router para redirigir
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (email.trim() === "" || password.trim() === "") {
       setError("Por favor, completa todos los campos.");
       return;
     }
-
-    setError(""); // Si no hay errores, limpiar el mensaje
-    alert("¡Datos correctos! Has iniciado sesión correctamente.");
-    navigate("/dashboard"); // Redirigir al Dashboard
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Si la respuesta es exitosa, redirige al dashboard
+        alert("¡Datos correctos! Has iniciado sesión correctamente.");
+        navigate("/dashboard");
+      } else {
+        // Si hay un error, muestra el mensaje de error del backend
+        setError(data.message || "Error al iniciar sesión");
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      setError("Error al conectar con el servidor");
+    }
   };
 
   return (
