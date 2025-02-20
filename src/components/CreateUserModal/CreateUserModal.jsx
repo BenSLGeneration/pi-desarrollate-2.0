@@ -5,9 +5,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
     name: "",
     email: "",
     password: "",
-    cargo: "Cargo Predeterminado",
-    permisos: "Personal",
-    status: "Pendiente",
+    permisos: "Usuario",
   });
 
   const handleSubmit = (e) => {
@@ -62,19 +60,6 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
             />
           </div>
 
-          {/* Campo Cargo */}
-          <div className="form-group">
-            <label>Cargo:</label>
-            <input
-              type="text"
-              value={formData.cargo}
-              onChange={(e) =>
-                setFormData({ ...formData, cargo: e.target.value })
-              }
-              required
-            />
-          </div>
-
           {/* Campo Permisos */}
           <div className="form-group">
             <label>Permisos:</label>
@@ -84,23 +69,8 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
                 setFormData({ ...formData, permisos: e.target.value })
               }
             >
-              <option value="Administrador">Administrador</option>
-              <option value="Personal">Personal</option>
-            </select>
-          </div>
-
-          {/* Campo Status */}
-          <div className="form-group">
-            <label>Status:</label>
-            <select
-              value={formData.status}
-              onChange={(e) =>
-                setFormData({ ...formData, status: e.target.value })
-              }
-            >
-              <option value="Confirmado">Confirmado</option>
-              <option value="Pendiente">Pendiente</option>
-              <option value="Desvinculado">Desvinculado</option>
+              <option value="Administrador">Admin</option>
+              <option value="Personal">Usuario</option>
             </select>
           </div>
 
