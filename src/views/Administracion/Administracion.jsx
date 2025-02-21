@@ -110,12 +110,20 @@ const Administracion = () => {
     <div>
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
+        <div className="card-body">
+                  {/* Botón para crear usuario */}
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="btn btn-primary w-100 mb-3"
+                  >
+                    Crear Usuario Hotelero
+                  </button>
           <div>
             {/* Contenido principal */}
-            <div className="container-fluid" style={{ paddingTop: "6rem" }}>
+            <div className="container-fluid" style={{ paddingTop: "3rem" }}>
               {/* Encabezado con filtros */}
               <div className="card mb-4">
-                <div className="card-header d-flex align-items-center justify-content-between">
+                <div className="card-header d-flex align-items-center justify-content-between mb-2">
                   <h6 className="title-text-color m-0">Administración de permisos</h6>
                   <div className="d-flex align-items-center gap-3 filters-container">
                     <input
@@ -136,14 +144,6 @@ const Administracion = () => {
                     </select>
                   </div>
                 </div>
-                <div className="card-body">
-                  {/* Botón para crear usuario */}
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="btn btn-primary w-100 mb-3"
-                  >
-                    Crear Usuario Hotelero
-                  </button>
                   {/* Componente de paginación */}
                   <PaginacionPermisos
                     datos={datosFiltrados}

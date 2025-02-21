@@ -15,54 +15,57 @@ const PaginacionPermisos = ({ datos, onUserDeleted }) => {
   const indiceInicio = (paginaActual - 1) * usuariosPorPagina;
   const indiceFin = indiceInicio + usuariosPorPagina;
   const usuariosPaginados = datos.slice(indiceInicio, indiceFin);
-  const totalPaginas = Math.ceil(datos.length / usuariosPorPagina);
+
+  // Calcular el número total de páginas (mínimo 1)
+  const totalPaginas = datos.length > 0 ? Math.ceil(datos.length / usuariosPorPagina) : 1;
 
   // Ajustar la página actual si no hay suficientes usuarios para la página actual
   useEffect(() => {
-    if (paginaActual > totalPaginas && totalPaginas > 0) {
-      setPaginaActual(totalPaginas); // Ir a la última página válida
+    if (paginaActual > totalPaginas) {
+      setPaginaActual(1); // Ir a la página 1 si no hay usuarios o si la página actual no existe
     }
   }, [datos, paginaActual, totalPaginas]);
 
   return (
     <div>
-            <div className="d-flex align-items-center mt-3">
+      {/* Controles de paginación */}
+      <div className="d-flex align-items-center mt-3">
         <button
-          className="btn btn-primary btn- mx-1"
+          className="btn btn-primary mx-1"
           onClick={() => setPaginaActual(paginaActual - 1)}
           disabled={paginaActual === 1}
         >
           Anterior
         </button>
-        <span className="text-center">
-          Página {paginaActual} de {totalPaginas}
-        </span>
+
+        <span className="mx-2">Página {paginaActual} de {totalPaginas}</span>
+
         <button
-          className="btn btn-primary btn- mx-1"
+          className="btn btn-primary mx-1"
           onClick={() => setPaginaActual(paginaActual + 1)}
           disabled={paginaActual === totalPaginas}
         >
           Siguiente
         </button>
       </div>
-      <div className="mt-4">
 
-      </div>
-      {/* Pasar los datos paginados a la tabla */}
+      {/* Renderiza la tabla con solo los usuarios de la página actual */}
       <TablaPermisos datos={usuariosPaginados} onUserDeleted={handleUserDeleted} />
+
+      {/* Repetir controles de paginación (opcional) */}
       <div className="d-flex align-items-center mt-3">
         <button
-          className="btn btn-primary btn- mx-1"
+          className="btn btn-primary mx-1"
           onClick={() => setPaginaActual(paginaActual - 1)}
           disabled={paginaActual === 1}
         >
           Anterior
         </button>
-        <span className="text-center">
-          Página {paginaActual} de {totalPaginas}
-        </span>
+
+        <span className="mx-2">Página {paginaActual} de {totalPaginas}</span>
+
         <button
-          className="btn btn-primary btn- mx-1"
+          className="btn btn-primary mx-1"
           onClick={() => setPaginaActual(paginaActual + 1)}
           disabled={paginaActual === totalPaginas}
         >
