@@ -66,7 +66,7 @@ const TablaReservaciones = ({ datos }) => {
                     <td>{reserva.medioPago}</td>
                     <td>{reserva.tipo}</td>
                     <td className="text-danger fw-bold">${reserva.pago.toLocaleString()}</td>
-                    <td className="text-danger fw-bold">{reserva.iva}%</td>
+                    <td className="text-danger fw-bold">${reserva.iva.toLocaleString()}</td>
                     <td className="text-danger fw-bold">${reserva.pagoTotal.toLocaleString()}</td>
                     <td className={`fw-bold ${reserva.status === 'Reservada' ? 'text-success' : 'text-danger'}`}>
                       {reserva.status}

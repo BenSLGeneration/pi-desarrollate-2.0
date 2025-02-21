@@ -20,7 +20,7 @@ const Reservaciones = () => {
                     checkOut: reserva.checkoutDate,
                     tipo: reserva.cabinType || 'Desconocido', // Ahora obtenemos el tipo de cabaña desde 'cabinType'
                     pago: reserva.paymentAmount || 0, // Monto de pago
-                    iva: reserva.iva || 19, // IVA, si no está presente se asigna el valor por defecto
+                    iva: reserva.iva || 0, // IVA, si no está presente se asigna el valor por defecto
                     pagoTotal: reserva.total || 0, // Total (Pago + IVA)
                     status: reserva.status || 'Pendiente', // Estado de la reserva
                     plataforma: reserva.bookingPlatform || 'Directo', // Plataforma de la reserva
