@@ -29,7 +29,7 @@ const PaginacionPermisos = ({ datos, onUserDeleted }) => {
   return (
     <div>
       {/* Controles de paginación */}
-      <div className="d-flex align-items-center mt-3">
+      <div className="d-flex align-items-center mb-3 mt-2">
         <button
           className="btn btn-primary mx-1"
           onClick={() => setPaginaActual(paginaActual - 1)}
@@ -53,7 +53,7 @@ const PaginacionPermisos = ({ datos, onUserDeleted }) => {
       <TablaPermisos datos={usuariosPaginados} onUserDeleted={handleUserDeleted} />
 
       {/* Repetir controles de paginación (opcional) */}
-      <div className="d-flex align-items-center mt-3">
+      <div className="d-flex align-items-center mt-1 mb-3">
         <button
           className="btn btn-primary mx-1"
           onClick={() => setPaginaActual(paginaActual - 1)}
