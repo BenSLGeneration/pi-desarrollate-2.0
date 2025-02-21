@@ -1,71 +1,77 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import TablaPermisos from "../TablaPermisos/TablaPermisos";
-import api from "../../api/axios";
 
-const PaginacionPermisos = () => {
-  const [usuarios, setUsuarios] = useState([]);
+const PaginacionPermisos = ({ datos, onUserDeleted }) => {
   const [paginaActual, setPaginaActual] = useState(1);
   const usuariosPorPagina = 10;
 
-  // Función para cargar usuarios
-  const fetchUsuarios = async () => {
-    try {
-      const response = await api.get("/users");
-      const usuariosMapeados = response.data.map((user) => ({
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      }));
-      setUsuarios(usuariosMapeados);
-    } catch (error) {
-      console.error("Error al obtener usuarios:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUsuarios();
-  }, []);
-
   // Función para manejar la eliminación de un usuario
   const handleUserDeleted = (id) => {
-    // Filtrar el usuario eliminado del estado
-    setUsuarios((prevUsuarios) => prevUsuarios.filter((user) => user.id !== id));
+    console.log("Usuario eliminado con ID:", id);
+    onUserDeleted(id); // Propagar la eliminación al componente padre
   };
 
-  // Función para manejar la creación de un usuario
-  // const handleUserCreated = (newUser) => {
-  //   // Agregar el nuevo usuario al estado
-  //   setUsuarios((prevUsuarios) => [...prevUsuarios, newUser]);
-  // };
-
+  // Calcular el índice de inicio y fin para la paginación
   const indiceInicio = (paginaActual - 1) * usuariosPorPagina;
   const indiceFin = indiceInicio + usuariosPorPagina;
-  const usuariosPaginados = usuarios.slice(indiceInicio, indiceFin);
-  const totalPaginas = Math.ceil(usuarios.length / usuariosPorPagina);
+  const usuariosPaginados = datos.slice(indiceInicio, indiceFin);
+
+  // Calcular el número total de páginas (mínimo 1)
+  const totalPaginas = datos.length > 0 ? Math.ceil(datos.length / usuariosPorPagina) : 1;
+
+  // Ajustar la página actual si no hay suficientes usuarios para la página actual
+  useEffect(() => {
+    if (paginaActual > totalPaginas) {
+      setPaginaActual(1); // Ir a la página 1 si no hay usuarios o si la página actual no existe
+    }
+  }, [datos, paginaActual, totalPaginas]);
 
   return (
     <div>
-      {/* Pasar handleUserCreated como prop al modal */}
-      <TablaPermisos
-        datos={usuariosPaginados}
-        onUserDeleted={handleUserDeleted}
-      />
-      <button
-        onClick={() => setPaginaActual(paginaActual - 1)}
-        disabled={paginaActual === 1}
-      >
-        Anterior
-      </button>
-      <span>
-        Página {paginaActual} de {totalPaginas}
-      </span>
-      <button
-        onClick={() => setPaginaActual(paginaActual + 1)}
-        disabled={paginaActual === totalPaginas}
-      >
-        Siguiente
-      </button>
+      {/* Controles de paginación */}
+      <div className="d-flex align-items-center mt-3">
+        <button
+          className="btn btn-primary mx-1"
+          onClick={() => setPaginaActual(paginaActual - 1)}
+          disabled={paginaActual === 1}
+        >
+          Anterior
+        </button>
+
+        <span className="mx-2">Página {paginaActual} de {totalPaginas}</span>
+
+        <button
+          className="btn btn-primary mx-1"
+          onClick={() => setPaginaActual(paginaActual + 1)}
+          disabled={paginaActual === totalPaginas}
+        >
+          Siguiente
+        </button>
+      </div>
+
+      {/* Renderiza la tabla con solo los usuarios de la página actual */}
+      <TablaPermisos datos={usuariosPaginados} onUserDeleted={handleUserDeleted} />
+
+      {/* Repetir controles de paginación (opcional) */}
+      <div className="d-flex align-items-center mt-3">
+        <button
+          className="btn btn-primary mx-1"
+          onClick={() => setPaginaActual(paginaActual - 1)}
+          disabled={paginaActual === 1}
+        >
+          Anterior
+        </button>
+
+        <span className="mx-2">Página {paginaActual} de {totalPaginas}</span>
+
+        <button
+          className="btn btn-primary mx-1"
+          onClick={() => setPaginaActual(paginaActual + 1)}
+          disabled={paginaActual === totalPaginas}
+        >
+          Siguiente
+        </button>
+      </div>
     </div>
   );
 };

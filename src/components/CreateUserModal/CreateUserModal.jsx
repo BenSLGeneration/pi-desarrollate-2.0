@@ -26,7 +26,6 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
   
     try {
       await onCreate(userDataToSend); // Envía los datos al componente padre
-      alert("Usuario creado exitosamente");
       window.location.reload(); // Recargar la página
     } catch (error) {
       console.error("Error al crear el usuario:", error);

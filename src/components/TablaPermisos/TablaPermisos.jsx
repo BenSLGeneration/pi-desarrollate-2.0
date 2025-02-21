@@ -7,13 +7,13 @@ const TablaPermisos = ({ datos, onUserDeleted }) => {
     if (window.confirm("¿Estás seguro de que deseas borrar este usuario?")) {
       try {
         await api.delete(`/users/${id}`);
-        onUserDeleted(id);
+        onUserDeleted(id); // Notificar al padre que un usuario ha sido eliminado
       } catch (error) {
-        console.error("Error al eliminar el usuario: ",error);
+        console.error("Error al eliminar el usuario:", error);
         alert("Error al eliminar el usuario. Intente nuevamente.");
       }
     }
-  }
+  };
 
   return (
     <div className="table-responsive">
@@ -38,16 +38,16 @@ const TablaPermisos = ({ datos, onUserDeleted }) => {
         </tfoot>
         <tbody>
           {datos.map((usuario) => (
-            <tr key={usuario.id}>
-              <td class="text-center">{usuario.id}</td>
-              <td class="text-center">{usuario.name}</td>
-              <td class="text-center">{usuario.email}</td>
-              <td class="text-center">{usuario.role}</td>
+            <tr key={usuario._id}>
+              <td className="text-center">{usuario._id}</td>
+              <td className="text-center">{usuario.name}</td>
+              <td className="text-center">{usuario.email}</td>
+              <td className="text-center">{usuario.role}</td>
               <td>
                 <button className="btn btn-primary mx-3">
                   Editar
                 </button>
-                <button className="btn btn-danger" onClick={() => handleDelete(usuario.id)}>
+                <button className="btn btn-danger" onClick={() => handleDelete(usuario._id)}>
                   Borrar
                 </button>
               </td>
