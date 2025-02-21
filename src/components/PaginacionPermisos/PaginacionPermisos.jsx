@@ -34,10 +34,10 @@ const PaginacionPermisos = () => {
   };
 
   // Función para manejar la creación de un usuario
-  const handleUserCreated = (newUser) => {
-    // Agregar el nuevo usuario al estado
-    setUsuarios((prevUsuarios) => [...prevUsuarios, newUser]);
-  };
+  // const handleUserCreated = (newUser) => {
+  //   // Agregar el nuevo usuario al estado
+  //   setUsuarios((prevUsuarios) => [...prevUsuarios, newUser]);
+  // };
 
   const indiceInicio = (paginaActual - 1) * usuariosPorPagina;
   const indiceFin = indiceInicio + usuariosPorPagina;
@@ -50,7 +50,6 @@ const PaginacionPermisos = () => {
       <TablaPermisos
         datos={usuariosPaginados}
         onUserDeleted={handleUserDeleted}
-        onUserCreated={handleUserCreated} // Pasar la función para crear usuarios
       />
       <button
         onClick={() => setPaginaActual(paginaActual - 1)}

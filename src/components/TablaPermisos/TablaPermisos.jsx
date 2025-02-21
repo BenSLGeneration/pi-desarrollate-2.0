@@ -39,10 +39,10 @@ const TablaPermisos = ({ datos, onUserDeleted }) => {
         <tbody>
           {datos.map((usuario) => (
             <tr key={usuario.id}>
-              <td>{usuario.id}</td>
-              <td>{usuario.name}</td>
-              <td>{usuario.email}</td>
-              <td>{usuario.role}</td>
+              <td class="text-center">{usuario.id}</td>
+              <td class="text-center">{usuario.name}</td>
+              <td class="text-center">{usuario.email}</td>
+              <td class="text-center">{usuario.role}</td>
               <td>
                 <button className="btn btn-primary mx-3">
                   Editar

@@ -8,10 +8,30 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
     permisos: "Usuario",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onCreate(formData); // Envía los datos al componente padre
-    onClose(); // Cierra el modal
+  
+    // Mapear permisos al formato requerido por el backend
+    const roleMapping = {
+      Administrador: "admin",
+      Personal: "usuario",
+    };
+  
+    const userDataToSend = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      role: roleMapping[formData.permisos], // Mapear permisos
+    };
+  
+    try {
+      await onCreate(userDataToSend); // Envía los datos al componente padre
+      alert("Usuario creado exitosamente");
+      window.location.reload(); // Recargar la página
+    } catch (error) {
+      console.error("Error al crear el usuario:", error);
+      alert("Error al crear el usuario. Intente nuevamente.");
+    }
   };
 
   if (!isOpen) return null;
