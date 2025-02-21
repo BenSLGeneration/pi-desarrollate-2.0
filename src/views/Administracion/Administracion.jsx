@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Administracion = () => {
 
-  const [lista, setLista] = useState([]);
+  const [lista, setLista] = useState([]); // SI SE BORRA NO FUNCIONA NADA
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filtroStatus, setFiltroStatus] = useState("all");
