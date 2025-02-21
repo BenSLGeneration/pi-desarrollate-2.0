@@ -15,8 +15,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validar campos vacíos
     if (email.trim() === "" || password.trim() === "") {
       setError("Por favor, completa todos los campos.");
       return;
@@ -47,6 +45,7 @@ const Login = () => {
       } else {
         setError("Ocurrió un error inesperado. Inténtalo más tarde.");
       }
+
     }
   };
 
