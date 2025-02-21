@@ -3,17 +3,16 @@ import PaginacionPermisos from '../../components/PaginacionPermisos/PaginacionPe
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
 import CreateUserModal from '../../components/CreateUserModal/CreateUserModal';
+import axios from 'axios';
 
 const Administracion = () => {
-  const [lista, setLista] = useState([
-    { id: 1, nombre: 'John Doe', cargo: 'Product Owner', permisos: 'Administrador', status: 'Confirmado' },
-    { id: 2, nombre: 'Jane Smith', cargo: 'Desarrolladora', permisos: 'Personal', status: 'Pendiente' },
-    { id: 3, nombre: 'Carlos López', cargo: 'Diseñador UI', permisos: 'Personal', status: 'Confirmado' },
-    { id: 4, nombre: 'Ana Pérez', cargo: 'Scrum Master', permisos: 'Administrador', status: 'Desvinculado' },
-  ]);
+
+  const [lista, setLista] = useState([]); // SI SE BORRA NO FUNCIONA NADA
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filtroStatus, setFiltroStatus] = useState("all");
   const [busqueda, setBusqueda] = useState("");
+
 
   // Función para manejar el cambio del filtro de estado
   const handleFiltroChange = (e) => {
@@ -25,7 +24,6 @@ const Administracion = () => {
     setBusqueda(e.target.value);
   };
 
-  // Filtrar datos según el estado y la búsqueda
   const datosFiltrados = lista.filter(usuario => {
     const matchesStatus = filtroStatus === "all" || 
       usuario.status.toLowerCase() === filtroStatus.toLowerCase();
@@ -58,25 +56,43 @@ const Administracion = () => {
     return matchesStatus && matchesSearch;
   });
 
-  // Función para crear un nuevo usuario
-  const handleCreateUser = (userData) => {
-    if (!userData.name || !userData.cargo || !userData.permisos || !userData.status) {
-      alert("Todos los campos son obligatorios");
-      return;
+
+  
+
+  const handleCreateUser = async (userData) => {
+
+    try {
+      if (!userData.name || !userData.email || !userData.password) {
+        alert("Todos los campos son obligatorios");
+        return;
     }
 
-    const ultimoID = lista.length > 0 ? Math.max(...lista.map((usuario) => usuario.id)) : 0;
-    const nuevoUsuario = {
-      id: ultimoID + 1,
-      nombre: userData.name,
-      cargo: userData.cargo,
-      permisos: userData.permisos,
-      status: userData.status,
+    const roleMapping = {
+      Administrador: "admin",
+      Personal: "usuario"
     };
-    setLista([...lista, nuevoUsuario]);
+    const role = roleMapping[userData.permisos];
+
+    const userDataToSend = {
+      name: userData.name,
+      email: userData.email,
+      password: userData.password,
+      role: role,
+    }
+    
+      const response = await axios.post("http://localhost:5000/api/users", userData);
+        alert("Usuario creado exitosamente")
+        console.log(response.data);
+    } catch (error) {
+      console.error(error);
+      alert("Error al crear el usuario");
+    }
+
+
   };
 
-  return (
+
+    return (
     <div>
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
