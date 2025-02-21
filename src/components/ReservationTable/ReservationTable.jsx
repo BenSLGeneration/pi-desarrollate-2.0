@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../api/axios';
+import './ReservationTable.css';
 
 const ReservationTable = () => {
     const [reservations, setReservations] = useState([]);
