@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Para redirigir
+import axios from "../../api/axios"; // Importa la instancia de Axios
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -14,34 +15,37 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     if (email.trim() === "" || password.trim() === "") {
       setError("Por favor, completa todos los campos.");
       return;
     }
-  
+
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        // Si la respuesta es exitosa, redirige al dashboard
-        alert("¡Datos correctos! Has iniciado sesión correctamente.");
-        navigate("/dashboard");
-      } else {
-        // Si hay un error, muestra el mensaje de error del backend
-        setError(data.message || "Error al iniciar sesión");
-      }
+      // Enviar credenciales al backend
+      const response = await axios.post("/users/login", { email, password });
+
+      // Extraer el token del backend
+      const { token } = response.data;
+
+      // Almacenar el token en localStorage
+      localStorage.setItem("token", token);
+
+      // Limpiar errores y redirigir al dashboard
+      setError("");
+      alert("¡Inicio de sesión exitoso!");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
-      setError("Error al conectar con el servidor");
+
+      // Mostrar mensaje de error si las credenciales son incorrectas
+      if (error.response && error.response.status === 400) {
+        setError("Credenciales incorrectas. Por favor, inténtalo de nuevo.");
+      } else if (error.response && error.response.status === 404) {
+        setError("Endpoint no encontrado. Verifica la URL del backend.");
+      } else {
+        setError("Ocurrió un error inesperado. Inténtalo más tarde.");
+      }
+
     }
   };
 
@@ -111,7 +115,6 @@ const Login = () => {
             <button className="btn btn-dark w-100 py-2" type="submit">
               Ingresar
             </button>
-
             <p className="mt-5 mb-3 text-body-secondary text-center">
               &copy; desarrolla-té
             </p>

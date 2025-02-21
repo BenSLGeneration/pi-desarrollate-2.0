@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../api/axios';
+import './ReservationTable.css';
 import html2pdf from 'html2pdf.js';
 
 const ReservationTable = () => {

@@ -1,0 +1,11 @@
+.espacio-vacio {
+    padding-top: 6rem !important;
+}
+
+.table td {
+    max-width: 150px; /* Establece un ancho máximo para cada celda */
+    white-space: normal; /* Permite que el texto se divida en varias líneas */
+    word-wrap: break-word; /* Divide palabras largas si es necesario */
+    overflow-wrap: break-word; /* Asegura que las palabras largas se ajusten */
+    text-align: left; /* Alineación del texto */
+}
