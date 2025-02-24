@@ -89,7 +89,7 @@ const Administracion = () => {
         role: role,
       };
 
-      const response = await axios.post("http://localhost:5000/api/users", userDataToSend);
+      const response = await axios.post("http://localhost:5000/api/users", userData);
       alert("Usuario creado exitosamente");
       console.log("Nuevo usuario creado:", response.data);
 

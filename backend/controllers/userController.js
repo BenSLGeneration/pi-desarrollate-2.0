@@ -6,6 +6,8 @@ const { removeListener } = require("../models/Client");
 const createUser = async (req, res) => {
     const { name, email, password, role } = req.body;
 
+    console.log("Datos recibidos en el backend:", { name, email, password, role });
+
     if (!name || !email || !password) {
         return res.status(400).json({ message: "Por favor, rellene todos los campos." });
     }
@@ -29,8 +31,11 @@ const createUser = async (req, res) => {
             password: hashedPassword,
             role: role || "usuario"  
         });
+
+        console.log("Usuario creado antes de guardar:", newUser);
        
         await newUser.save();
+
         console.log("Role del usuario:", newUser.role);
        
         const token = jwt.sign(
@@ -40,7 +45,16 @@ const createUser = async (req, res) => {
         );
         console.log("Token generado:", token);
 
-        res.status(201).json({ message: "Usuario creado exitosamente", token });
+        res.status(201).json({
+         message: "Usuario creado exitosamente",
+         user: {
+            _id: newUser._id,
+            name: newUser.name,
+            email: newUser.email,
+            role: newUser.role
+         }, 
+         token 
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Error al crear el usuario." });

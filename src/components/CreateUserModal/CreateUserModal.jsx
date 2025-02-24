@@ -23,10 +23,12 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
       password: formData.password,
       role: roleMapping[formData.permisos], // Mapear permisos
     };
-  
+
+    console.log("Datos enviados al backend:", userDataToSend);
+
     try {
       await onCreate(userDataToSend); // Envía los datos al componente padre
-      window.location.reload(); // Recargar la página
+      onClose(); // Cerrar el modal
     } catch (error) {
       console.error("Error al crear el usuario:", error);
       alert("Error al crear el usuario. Intente nuevamente.");
@@ -84,9 +86,11 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
             <label>Permisos:</label>
             <select
               value={formData.permisos}
-              onChange={(e) =>
-                setFormData({ ...formData, permisos: e.target.value })
-              }
+              onChange={(e) => {
+                const newValue = e.target.value;
+                console.log("Nuevo valor:", newValue);
+                setFormData({ ...formData, permisos: newValue });
+              }}
             >
               <option value="Administrador">Admin</option>
               <option value="Personal">Usuario</option>
