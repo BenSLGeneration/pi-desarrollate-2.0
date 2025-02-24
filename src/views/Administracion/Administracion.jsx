@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import PaginacionPermisos from "../../components/PaginacionPermisos/PaginacionPermisos";
 import CreateUserModal from "../../components/CreateUserModal/CreateUserModal";
+import EditUserModal from "../../components/EditUserModal/EditUserModal";
 import axios from "axios";
 
 const Administracion = () => {
   const [lista, setLista] = useState([]); // Estado para almacenar la lista de usuarios
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Estado para el modal de edición
   const [filtroStatus, setFiltroStatus] = useState("all");
   const [busqueda, setBusqueda] = useState("");
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null); // Estado para el usuario seleccionado
 
   // Función para cargar usuarios desde el backend
   useEffect(() => {
@@ -25,7 +28,6 @@ const Administracion = () => {
         alert("Error al cargar los usuarios. Intente nuevamente.");
       }
     };
-
     fetchUsuarios();
   }, []);
 
@@ -47,14 +49,11 @@ const Administracion = () => {
       Personal: "usuario",
     };
     const mappedRole = roleMapping[filtroStatus] || filtroStatus;
-
     // Filtrar por estado (role)
     const matchesStatus =
       filtroStatus === "all" || usuario.role?.toLowerCase() === mappedRole?.toLowerCase();
-
     // Filtrar por búsqueda
     let matchesSearch = false;
-
     if (!busqueda) {
       matchesSearch = true; // Si no hay búsqueda, todos los usuarios coinciden
     } else {
@@ -65,7 +64,6 @@ const Administracion = () => {
         usuario.email.toLowerCase().includes(lowerBusqueda) || // Buscar por email
         usuario.role.toLowerCase().includes(lowerBusqueda); // Buscar por role
     }
-
     return matchesStatus && matchesSearch;
   });
 
@@ -76,7 +74,6 @@ const Administracion = () => {
         alert("Todos los campos son obligatorios");
         return;
       }
-
       const roleMapping = {
         Administrador: "admin",
         Personal: "usuario",
@@ -88,11 +85,9 @@ const Administracion = () => {
         password: userData.password,
         role: role,
       };
-
-      const response = await axios.post("http://localhost:5000/api/users", userData);
+      const response = await axios.post("http://localhost:5000/api/users", userDataToSend);
       alert("Usuario creado exitosamente");
       console.log("Nuevo usuario creado:", response.data);
-
       // Agregar el nuevo usuario al estado `lista`
       setLista((prevLista) => [...prevLista, response.data]);
     } catch (error) {
@@ -102,52 +97,76 @@ const Administracion = () => {
   };
 
   // Función para manejar la eliminación de un usuario
+  // Función para manejar la eliminación de un usuario
   const handleUserDeleted = (id) => {
     setLista((prevLista) => prevLista.filter((usuario) => usuario._id !== id));
+  };
+
+  // Función para manejar la edición de un usuario
+  const handleEditUser = async (id, updatedData) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/users/${id}`, updatedData);
+      alert("Usuario actualizado exitosamente");
+      console.log("Usuario actualizado:", response.data);
+
+      // Actualizar el usuario en el estado `lista`
+      setLista((prevLista) =>
+        prevLista.map((usuario) =>
+          usuario._id === id ? { ...usuario, ...updatedData } : usuario
+        )
+      );
+    } catch (error) {
+      console.error("Error al actualizar el usuario:", error);
+      alert("Error al actualizar el usuario. Intente nuevamente.");
+    }
   };
 
   return (
     <div>
       <main id="content-wrapper" className="d-flex flex-column">
         <div id="content">
-        <div className="card-body">
-                  {/* Botón para crear usuario */}
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="btn btn-primary w-100 mb-3"
-                  >
-                    Crear Usuario Hotelero
-                  </button>
-          <div>
-            {/* Contenido principal */}
-            <div className="container-fluid" style={{ paddingTop: "3rem" }}>
-              {/* Encabezado con filtros */}
-              <div className="card mb-4">
-                <div className="card-header d-flex align-items-center justify-content-between mb-2">
-                  <h6 className="title-text-color m-0">Administración de permisos</h6>
-                  <div className="d-flex align-items-center gap-3 filters-container">
-                    <input
-                      type="text"
-                      className="form-control search-bar"
-                      placeholder="Buscar por ID, Nombre, Email, Rol..."
-                      value={busqueda}
-                      onChange={handleBusquedaChange}
-                    />
-                    <select
-                      className="form-control w-auto"
-                      value={filtroStatus}
-                      onChange={handleFiltroChange}
-                    >
-                      <option value="all">Todos</option>
-                      <option value="Administrador">Administrador</option>
-                      <option value="Personal">Usuario</option>
-                    </select>
+          <div className="card-body">
+            {/* Botón para crear usuario */}
+            <button
+              onClick={() => setIsCreateModalOpen(true)}
+              className="btn btn-primary w-100 mb-3"
+            >
+              Crear Usuario Hotelero
+            </button>
+            <div>
+              {/* Contenido principal */}
+              <div className="container-fluid" style={{ paddingTop: "3rem" }}>
+                {/* Encabezado con filtros */}
+                <div className="card mb-4">
+                  <div className="card-header d-flex align-items-center justify-content-between mb-2">
+                    <h6 className="title-text-color m-0">Administración de permisos</h6>
+                    <div className="d-flex align-items-center gap-3 filters-container">
+                      <input
+                        type="text"
+                        className="form-control search-bar"
+                        placeholder="Buscar por ID, Nombre, Email, Rol..."
+                        value={busqueda}
+                        onChange={handleBusquedaChange}
+                      />
+                      <select
+                        className="form-control w-auto"
+                        value={filtroStatus}
+                        onChange={handleFiltroChange}
+                      >
+                        <option value="all">Todos</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Personal">Usuario</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
                   {/* Componente de paginación */}
                   <PaginacionPermisos
                     datos={datosFiltrados}
                     onUserDeleted={handleUserDeleted}
+                    onEdit={(usuario) => {
+                      setUsuarioSeleccionado(usuario);
+                      setIsEditModalOpen(true);
+                    }}
                   />
                 </div>
               </div>
@@ -157,10 +176,19 @@ const Administracion = () => {
       </main>
       {/* Modal para crear usuario */}
       <CreateUserModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
         onCreate={handleCreateUser}
       />
+      {/* Modal para editar usuario */}
+      {usuarioSeleccionado && (
+        <EditUserModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          usuario={usuarioSeleccionado}
+          onUpdate={handleEditUser}
+        />
+      )}
     </div>
   );
 };
