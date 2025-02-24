@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     type: String, 
     enum: ["usuario", "admin"],
     default: "usuario"
-  }
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
