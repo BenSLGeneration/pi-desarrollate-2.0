@@ -4,7 +4,7 @@ const cabinSchema = new mongoose.Schema({
   type: { 
     type: String, 
     required: true, 
-    enum: ["TinyCabin", "Suite"] 
+    enum: ["Couple Room", "Suite"] 
   },
   number: { 
     type: String, 
