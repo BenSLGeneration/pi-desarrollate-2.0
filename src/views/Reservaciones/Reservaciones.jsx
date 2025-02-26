@@ -16,8 +16,8 @@ const Reservaciones = () => {
                     id: reserva._id,
                     nombreHuesped: reserva.client || 'Sin nombre', // Ahora 'client' es un string (nombre)
                     email: reserva.email || 'No disponible', // 'email' está disponible directamente
-                    checkIn: reserva.checkinDate,
-                    checkOut: reserva.checkoutDate,
+                    checkIn: new Date(reserva.checkinDate).toLocaleString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                    checkOut: new Date(reserva.checkoutDate).toLocaleString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
                     tipo: reserva.cabinType || 'Desconocido', // Ahora obtenemos el tipo de cabaña desde 'cabinType'
                     pago: reserva.paymentAmount || 0, // Monto de pago
                     iva: reserva.iva || 0, // IVA, si no está presente se asigna el valor por defecto
