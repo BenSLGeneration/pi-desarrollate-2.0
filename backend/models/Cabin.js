@@ -20,8 +20,8 @@ const cabinSchema = new mongoose.Schema({
     required: true 
   },
   hasHotTub: { 
-    type: Boolean, 
-    default: false 
+    type: Number, 
+    default: 0
   },
   status: { 
     type: String, 

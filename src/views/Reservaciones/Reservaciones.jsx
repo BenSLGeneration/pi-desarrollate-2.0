@@ -27,7 +27,7 @@ const Reservaciones = () => {
                     medioPago: reserva.paymentMethod || 'No especificado', // Medio de pago
                     cantidadAdultos: reserva.adults || 0, // Cantidad de adultos
                     cantidadNiños: reserva.children || 0, // Cantidad de niños
-                    tinaja: reserva.hasHotTub ? '✅' : '❌', // Si tiene tinaja
+                    tinaja: reserva.hasHotTub === 60000 ? '$60.000' : '$0', // Si tiene tinaja
                 }));
                 setReservations(formattedReservations); // Establece las reservas formateadas en el estado
             } catch (error) {

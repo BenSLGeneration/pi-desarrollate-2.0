@@ -81,7 +81,7 @@ exports.updateCabin = async (req, res) => {
         cabin.number = number || cabin.number;
         cabin.maxAdults = maxAdults || cabin.maxAdults;
         cabin.maxChildren = maxChildren || cabin.maxChildren;
-        cabin.hasHotTub = hasHotTub !== undefined ? hasHotTub : cabin.hasHotTub;
+        cabin.hasHotTub = hasHotTub || cabin.hasHotTub;
         cabin.status = status || cabin.status;
         cabin.price = price || cabin.price;
         cabin.currency = currency || cabin.currency;
